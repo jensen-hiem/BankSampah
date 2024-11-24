@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            .container{
+                /* border: 1px solid black */
+                display: grid;
+                width: 1600px;
+                height: 900px;
+                grid-template-columns: 300px auto auto auto auto;
+                grid-template-rows: 100px auto auto auto;
+                column-gap: 5px;
+                row-gap: 5px;
+                grid-template-areas:
+                "header header header header header"
+                "sidebars main main main main"
+                "sidebars main main main main"
+                "sidebars main main main main"
+            }
+
+            .sidebar{
+                border: 1px solid black;
+                grid-area: sidebars;
+                background-color: white;
+                display: flex;
+                flex-direction: column;
+            }
+
+            header{
+                border: 1px solid black;
+                grid-area: header;
+                background-color: white;
+                text-align: center;
+                justify-content: center;
+                padding: 25px
+            }
+            .main{
+                border: 1px solid black;
+                grid-area: main;
+                background-color: white;
+                padding: 10px;
+            }
+            .sidebar * {
+                width: 300px;
+                height: 50px
+            }
+            #akun{
+                margin-top: auto;
+            }
+            table{
+                width: 60%;
+                height: 60%;
+            }
+            table *{
+                padding: 5px;
+            }
+        </style>
+        <meta charset="UTF-8" >
+        <title>Bank Sampah: Home</title>
+    </head>
+    <body>
+        <div class="container">
+            <header><h1>Bank Sampah</h1></header>
+            <div class="sidebar">
+                <button><a href="member1.html">Daftar Harga Beli Sampah</a></button>
+                <button><a href="member2.html">Melihat History setoran sampah ke bank sampah komplek</a></button>
+                <button><a href="member3.html">Melihat laporan pendapatan hasil setoran</a></button>
+                <div id="akun">
+                    <button><a>Akun</a></button>
+                </div>
+            </div>
+            <div class="main">
+                <h2>Daftar Harga Jual:</h2>
+                    <table border="1">
+                        <tr>
+                            <td>Nama Sampah</td>
+                            <td>Harga Sampah</td>
+                        </tr>
+                        <tr>
+                            <td>Botol Plastik</td>
+                            <td>Rp 20.000</td>
+                        </tr>
+                        <tr>
+                            <td>Bungkus Ciki</td>
+                            <td>Rp 1.000</td>
+                        </tr>
+                        <tr>
+                            <td>Botol Kecap</td>
+                            <td>Rp 12.000</td>
+                        </tr>
+                        <tr>
+                            <td>Botol Kaca</td>
+                            <td>Rp 5.000</td>
+                        </tr>
+                        <tr>
+                            <td>Bungkus Nasi</td>
+                            <td>Rp10.000</td>
+                        </tr>
+                        <tr>
+                            <td>Botol Sirup</td>
+                            <td>Rp 1.500</td>
+                        </tr>
+                    </table>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body{
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            background-color:whitesmoke;
+        }
+        #divLogin{
+            text-align: center;
+            background:white;
+            box-sizing: 0px black;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width:350px;
+        }
+        #jLogin{
+            text-align: center;
+            padding:20px;
+        }
+        label{
+            display: block;
+        }
+        input{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="divLogin">
+        <h1 id="jLogin">Login</h1>
+        <table>
+            <tr>
+                <td> <label for="username">Username/Email</label></td>
+                <td> <input type="text" id="username" placeholder="Isi username"></td>
+            </tr>
+            <tr>
+                <td><label for="password">Password</label></td>
+                <td><input type="password" id="password" placeholder="Isi password"></td>
+            </tr>
+        </table>
+        <button>Login</button>
+    </div>
+</body>
+</html>
