@@ -5,21 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kelola Bank Sampah</title>
     <link rel="stylesheet" href="sy.css">
+    <script>
+        window.onload = function() {
+            // Get current date
+            var currentDate = new Date();
+            
+            // Format the date to YYYY-MM-DD
+            var formattedDate = currentDate.toISOString().split('T')[0];
+            
+            // Set the value of the input field to the current date
+            document.getElementById("dateInput").value = formattedDate;
+        };
+    </script>
     <style>
         body{
-            background-color: lightblue;
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
             margin:0;
             font-family:Arial, Helvetica, sans-serif;
+            color:#333;
           
         }
         #judulAdmin{
-            background-color: #4CAF50;
+            background-color: #28a745;
             color: white;
-            padding: 30px;
+            padding: 20x;
             text-align: center;
             font-size: 50px;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -43,9 +56,26 @@
             <button onclick="showForm('jenis-sampah-form')">Tambah Sampah</button>
             <form id="jenis-sampah-form" style="display: none;" onsubmit="addJenisSampah(event)">
                 <input type="text" id="sampahName" placeholder="Nama Sampah" required>
-                <input type="text" id="jenisSampah" placeholder="Jenis Sampah" required>
-                <input type="text" id="satuan" placeholder="Satuan (kg, buah, dll)" required>
+
+                <select id="jenisSampah" required>
+                    <option value="" disabled selected>Pilih Jenis Sampah</option>
+                    <option value="plastik">Plastik</option>
+                    <option value="kaca">Kaca</option>
+                    <option value="kertas">Kertas</option>
+                    <option value="logam">Logam</option>
+                </select>
+
+                <select id="satuan" required>
+                    <option value="" disabled selected>Satuan Unit Kuantitas</option>
+                    <option value="kilogram">Kilogram</option>
+                    <option value="buah">Buah</option>
+                    <option value="gram">Gram</option>
+                </select>
+
                 <input type="number" id="harga" placeholder="Harga Beli" required>
+
+                <label for="dateInput">Tanggal:</label>
+                <input type="date" id="dateInput" name="dateInput" required>
                 <button type="submit">Tambah</button>
             </form>
             <table>
@@ -55,7 +85,8 @@
                         <th>Nama Sampah</th>
                         <th>Jenis Sampah</th>
                         <th>Satuan</th>
-                        <th>Harga Beli</th>
+                        <th>Harga beli</th>
+                        <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>

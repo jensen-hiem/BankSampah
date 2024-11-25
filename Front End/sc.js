@@ -18,8 +18,10 @@ function addJenisSampah(event) {
     const jenis = document.getElementById('jenisSampah').value;
     const satuan = document.getElementById('satuan').value;
     const harga = document.getElementById('harga').value;
+    const dateInput = document.getElementById('dateInput').value;
 
-    jenisSampah.push({ name, jenis, satuan, harga });
+
+    jenisSampah.push({ name, jenis, satuan, harga,dateInput});
     renderJenisSampah();
     document.getElementById('jenis-sampah-form').reset();
 }
@@ -109,6 +111,7 @@ function renderJenisSampah() {
                 <td id="jenis-${index}">${item.jenis}</td>
                 <td id="satuan-${index}">${item.satuan}</td>
                 <td id="harga-${index}">${item.harga}</td>
+                <td id="date-${index}">${item.dateInput}</td> <!-- Tampilkan tanggal -->
                 <td>
                     <button onclick="editJenisSampah(${index})">Edit</button>
                 </td>
