@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Bank Sampah</title>
+    <link rel="stylesheet" href="sy.css">
+    <style>
+        body{
+            background-color: lightblue;
+            margin:0;
+            font-family:Arial, Helvetica, sans-serif;
+          
+        }
+        #judulAdmin{
+            background-color: #4CAF50;
+            color: white;
+            padding: 30px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="judulAdmin" >Dashboard Admin</div>
+    <header>
+        <nav>
+            <button onclick="showPage('jenis-sampah')">Kelola Jenis Sampah</button>
+            <button onclick="showPage('harga-sampah')">Kelola Harga Sampah</button>
+            <button onclick="showPage('data-member')">Kelola Data Member</button>
+            <button onclick="showPage('transaksi')">Kelola Transaksi penyetoran Member</button>
+            <button onclick="showPage('transaksiPenyetoran')">Kelola Transaksi Bank Sampah</button>
+            <button onclick="showPage('LaporanKeluarMasuk')">Laporan Keluar masuk Sampah</button><!--INI JUGA BELUM DIBUAT-->
+            
+        </nav>
+    </header>
+
+    <main>
+        <div id="jenis-sampah" class="page" style="display: none;">
+            <h2>Kelola Jenis Sampah</h2>
+            <button onclick="showForm('jenis-sampah-form')">Tambah Sampah</button>
+            <form id="jenis-sampah-form" style="display: none;" onsubmit="addJenisSampah(event)">
+                <input type="text" id="sampahName" placeholder="Nama Sampah" required>
+                <input type="text" id="jenisSampah" placeholder="Jenis Sampah" required>
+                <input type="text" id="satuan" placeholder="Satuan (kg, buah, dll)" required>
+                <input type="number" id="harga" placeholder="Harga Beli" required>
+                <button type="submit">Tambah</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Sampah</th>
+                        <th>Jenis Sampah</th>
+                        <th>Satuan</th>
+                        <th>Harga Beli</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="sampahList"></tbody>
+            </table>
+        </div>
+
+        <div id="harga-sampah" class="page" style="display: none;">
+            <h2>Daftar harga beli sampah</h2>
+            <button onclick="showForm('harga-sampah-form')">Tambah Sampah</button>
+            <form id="harga-sampah-form" style="display: none;" onsubmit="addJenisSampah(event)">
+                <input type="text" id="sampahName" placeholder="Nama Sampah" required>
+                <input type="text" id="jenisSampah" placeholder="Jenis Sampah" required>
+                <input type="text" id="satuan" placeholder="Satuan (kg, buah, dll)" required>
+                <input type="number" id="harga" placeholder="Harga Beli" required>
+                <button type="submit">Tambah</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Sampah</th>
+                        <th>Jenis Sampah</th>
+                        <th>Satuan</th>
+                        <th>Harga Beli</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="sampahList"></tbody>
+            </table>
+        </div>
+
+        <div id="data-member" class="page" style="display: none;">
+            <h2>Kelola Data Member</h2>
+            <button onclick="showForm('member-form')">Tambah Member</button>
+            <form id="member-form" style="display: none;" onsubmit="addMember(event)">
+                <input type="text" id="memberName" placeholder="Nama Member" required>
+                <input type="text" id="phone" placeholder="Nomor HP" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <textarea id="address" placeholder="Alamat" required></textarea>
+                <button type="submit">Simpan</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Nomor HP</th>
+                        <th>Email</th>
+                        <th>Alamat</th>
+                    </tr>
+                </thead>
+                <tbody id="memberList"></tbody>
+            </table>
+        </div>
+
+        <div id="transaksi" class="page" style="display: none;">
+            <!-- Konten Kelola Transaksi -->
+            <h2>Kelola Transaksi Penyetoran Member</h2>
+            <button onclick="showForm('transaksi-form')">Tambah Transaksi</button>
+            <form id="transaksi-form" style="display: none;" onsubmit="addTransaksi(event)">
+                <input type="text" id="transaksiMember" placeholder="Nama Member" required>
+                <input type="text" id="transaksiSampah" placeholder="Nama Sampah" required>
+                <input type="number" id="transaksiJumlah" placeholder="Jumlah Sampah" required> <!--Ini TOTALNYA BELUM ADA RUMUS CUMAN BARU DITAMBAHIN TOTAL HARGA-->
+                <button type="submit">Simpan</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Member</th>
+                        <th>Jenis Sampah</th>
+                        <th>Jumlah Sampah</th>
+                        <th>Total Harga</th>
+                    </tr>
+                </thead>
+                <tbody id="transaksiList"></tbody>
+            </table>
+        </div>
+
+        <div id="transaksiPenyetoran" class="page" style="display: none;">
+            <!-- Konten Kelola Transaksi -->
+            <h2>Kelola Transaksi Penyetoran ke Bank sampah pusat</h2>
+            <button onclick="showForm('transaksiPenyetoran-form')">Tambah Transaksi</button>
+            <form id="transaksiPenyetoran-form" style="display: none;" onsubmit="addTransaksi(event)">
+                <input type="text" id="transaksiPId" placeholder="IdSampah" required>
+                <input type="text" id="transaksiPJumlah" placeholder="Jumlah Sampah" required>
+                <input type="number" id="transaksiPTotal" placeholder="Total Harga" required> <!--Ini TOTALNYA BELUM ADA RUMUS CUMAN BARU DITAMBAHIN TOTAL HARGA-->
+                <button type="submit">Simpan</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Id Sampah</th>
+                        <th>Jumlah Sampah</th>
+                        <th>Total Harga</th>
+                    </tr>
+                </thead>
+                <tbody id="transaksiPenyetoranList"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="sc.js"></script>
+</body>
+</html>
