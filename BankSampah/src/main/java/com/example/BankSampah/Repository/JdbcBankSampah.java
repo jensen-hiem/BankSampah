@@ -1,11 +1,12 @@
-package com.example.BankSampah.Repository;
+// package com.example.BankSampah.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+// import java.sql.ResultSet;
+// import java.sql.SQLException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.jdbc.core.JdbcTemplate;
+// import org.springframework.stereotype.Repository;
+
 
 import com.example.BankSampah.Model.JenisSampah;
 
@@ -46,3 +47,4 @@ public class JdbcBankSampah implements BankSampahRepository{
         );
     }
 }
+
