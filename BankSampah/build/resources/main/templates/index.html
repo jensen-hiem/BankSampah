@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Bank Sampah</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        window.onload = function() {
+            // Get current date
+            var currentDate = new Date();
+            
+            // Format the date to YYYY-MM-DD
+            var formattedDate = currentDate.toISOString().split('T')[0];
+            
+            // Set the value of the input field to the current date
+            document.getElementById("dateInput").value = formattedDate;
+        };
+    </script>
+    <style>
+        body{
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+            margin:0;
+            font-family:Arial, Helvetica, sans-serif;
+            color:#333;
+          
+        }
+        #judulAdmin{
+            background-color: #28a745;
+            color: white;
+            padding: 20x;
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="judulAdmin" >Dashboard Admin</div>
+    <header>
+        <nav>
+            <button onclick="showPage('jenis-sampah')">Kelola Sampah</button>
+            <button onclick="showPage('data-member')">Kelola Data Member</button>
+            <button onclick="showPage('transaksi')">Kelola Transaksi penyetoran Member</button>
+            <button onclick="showPage('transaksiPenyetoran')">Kelola Transaksi Bank Sampah</button>
+            <button onclick="showBothTables()">Laporan Keluar Masuk Sampah</button>
+            
+        </nav>
+    </header>
+
+    <main>
+        <div id="jenis-sampah" class="page" style="display: none;">
+            <h2>Kelola Sampah</h2>
+            <button onclick="showForm('jenis-sampah-form')">Tambah Sampah</button>
+            <form id="jenis-sampah-form" style="display: none;" onsubmit="addJenisSampah(event)">
+                <input type="text" id="sampahName" placeholder="Nama Sampah" required>
+
+                <select id="jenisSampah" required>
+                    <option value="" disabled selected>Pilih Jenis Sampah</option>
+                    <option value="plastik">Plastik</option>
+                    <option value="kaca">Kaca</option>
+                    <option value="kertas">Kertas</option>
+                    <option value="logam">Logam</option>
+                </select>
+
+                <select id="satuan" required>
+                    <option value="" disabled selected>Satuan Unit Kuantitas</option>
+                    <option value="kilogram">Kilogram</option>
+                    <option value="buah">Buah</option>
+                    <option value="gram">Gram</option>
+                </select>
+
+                <input type="number" id="harga" placeholder="Harga Beli" required>
+
+                <label for="dateInput">Tanggal:</label>
+                <input type="date" id="dateInput" name="dateInput" required>
+                <button type="submit">Tambah</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama Sampah</th>
+                        <th>Jenis Sampah</th>
+                        <th>Satuan</th>
+                        <th>Harga beli</th>
+                        <th>Tanggal</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="sampahList"></tbody>
+            </table>
+        </div>
+
+        <div id="data-member" class="page" style="display: none;">
+            <h2>Kelola Data Member</h2>
+            <button onclick="showForm('member-form')">Tambah Member</button>
+            <form id="member-form" style="display: none;" onsubmit="addMember(event)">
+                <input type="text" id="memberName" placeholder="Nama Member" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" id="phone" placeholder="Nomor HP" required>
+                <input type="text" id="address" placeholder="Alamat" required>
+                <input type="Kelurahan" id="Kelurahan" placeholder="Keluarahan" required>
+                <button type="submit">Simpan</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>email</th>
+                        <th>Nomor HP</th>
+                        <th>Alamat</th>
+                        <th>Keluarahan</th>
+                    </tr>
+                </thead>
+                <tbody id="memberList"></tbody>
+            </table>
+        </div>
+
+
+        <div id="transaksi" class="page" style="display: none;">
+            <!-- Konten Kelola Transaksi -->
+            <h2>Kelola Transaksi Penyetoran Member</h2>
+            <button onclick="showForm('transaksi-form')">Tambah Transaksi</button>
+            <form id="transaksi-form" style="display: none;" onsubmit="addTransaksi(event)">
+                <input type="text" id="transaksiMember" placeholder="Username dari member" required>
+                <label for="dateInput">Tanggal:</label>
+                <input type="date" id="dateInput" name="dateInput" required>
+                <select id="transaksiSampah" required>
+                    <option value="" disabled selected>Pilih Jenis Sampah</option>
+                    <option value="plastik">Plastik</option>
+                    <option value="kaca">Kaca</option>
+                    <option value="kertas">Kertas</option>
+                    <option value="logam">Logam</option>
+                </select>
+                <input type="number" id="transaksiJumlah" placeholder="Jumlah Sampah" required>
+                <button type="submit">Simpan</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Username Member</th>
+                        <th>Tanggal Transaksi</th>
+                        <th>Jenis Sampah</th>
+                        <th>Jumlah Sampah</th>
+                        <th>Total Harga</th>
+                    </tr>
+                </thead>
+                <tbody id="transaksiList"></tbody>
+            </table>
+        </div>
+
+        <div id="transaksiPenyetoran" class="page" style="display: none;">
+            <!-- Konten Kelola Transaksi -->
+            <h2>Kelola Transaksi Penyetoran ke Bank sampah pusat</h2>
+            <button onclick="showForm('transaksiPenyetoran-form')">Tambah Transaksi ke Bank Pusat</button>
+            <form id="transaksiPenyetoran-form" style="display: none;" onsubmit="addTransaksiPenyetoran(event)">
+                <select id="transaksiBankSampah" required>
+                    <option value="" disabled selected>Pilih Bank Sampah</option>
+                    <option value="Bank Sampah Kec. A">Bank Sampah Kec. A</option>
+                    <option value="Bank Sampah Kec. B">Bank Sampah Kec. B</option>
+                    <option value="Bank Sampah Kec. C">Bank Sampah Kec. C</option>
+                </select>
+        
+                <label for="dateInput">Tanggal:</label>
+                <input type="date" id="dateInput" name="dateInput" required>
+        
+                <select id="transaksiSampahPenyetoran" required>
+                    <option value="" disabled selected>Pilih Jenis Sampah</option>
+                    <option value="plastik">Plastik</option>
+                    <option value="kaca">Kaca</option>
+                    <option value="kertas">Kertas</option>
+                    <option value="logam">Logam</option>
+                </select>
+
+                <input type="number" id="jumlahSampah" required placeholder="Jumlah Sampah">
+                <input type="number" id="totalHarga" required placeholder="Total Harga">
+
+                <button type="submit">Simpan</button>
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Bank Sampah</th>
+                        <th>Tanggal Transaksi</th>
+                        <th>Jenis Sampah</th>
+                        <th>Jumlah Sampah</th>
+                        <th>Total Harga</th>
+                    </tr>
+                </thead>
+                <tbody id="transaksiPenyetoranList"></tbody>
+            </table>
+        </div>
+
+        <div>
+            <div id="transaksiLaporan" class="page" style="display: none;">
+                <!-- Konten Kelola Transaksi -->
+                <h2>Laporan Transaksi Masuk</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Username Member</th>
+                            <th>Tanggal Transaksi</th>
+                            <th>Jenis Sampah</th>
+                            <th>Jumlah Sampah</th>
+                            <th>Total Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaksiListLaporan"></tbody>
+                </table>
+            </div>
+    
+            <div id="transaksiPenyetoranLaporan" class="page" style="display: none;">
+                <!-- Konten Kelola Transaksi -->
+                <h2>Laporan Transaksi Keluar</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Bank Sampah</th>
+                            <th>Tanggal Transaksi</th>
+                            <th>Jenis Sampah</th>
+                            <th>Jumlah Sampah</th>
+                            <th>Total Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaksiPenyetoranList"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>//script buat manggil di laporan
+        function showBothTables() {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(page => {
+        page.style.display = 'none';
+    });
+
+    // Tampilkan elemen laporan
+    document.getElementById('transaksiLaporan').style.display = 'block';
+    document.getElementById('transaksiPenyetoranLaporan').style.display = 'block';
+}
+    </script>
+    
+</body>
+</html>
