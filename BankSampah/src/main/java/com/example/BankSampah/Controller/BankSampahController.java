@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.BankSampah.Model.JenisSampah;
+import com.example.BankSampah.Repository.BankSampahRepository;
+
 @Controller
 public class BankSampahController {
-    // @Autowired
-    // private BankSampahRepository repo;
+    @Autowired
+    private BankSampahRepository repo;
+
     @GetMapping("/")
-    public String UIAdmin(){
+    public String UIAdmin(Model model){
+        Iterable<JenisSampah> jenisSampah = this.repo.findAllNamaSampah();
+        model.addAttribute("results", jenisSampah);
+
         return "index";
     }
-
-
-    // @PostMapping("/add")
-    // public String inputNamaSampah(@RequestParam(required = false) String namaSampah, @RequestParam String jenisSampah, @RequestParam String SUK, @RequestParam float hargaBeli, @RequestParam String tanggal){
-    //     this.repo.inputNamaSampah(namaSampah, jenisSampah, SUK, hargaBeli, tanggal);
-    //     return "redirect:/";
-    // }
 }

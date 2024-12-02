@@ -85,9 +85,19 @@
                         <th>Nama Sampah</th>
                         <th>Jenis Sampah</th>
                         <th>Satuan</th>
-                        <th>Harga beli</th>
+                        <th>Jumlah Sampah</th>
+                        <th>Harga Total</th>
                         <th>Tanggal</th>
                         <th>Aksi</th>
+                    </tr>
+                    <tr th:each="row, stat : ${results}">
+                        <td th:text="${stat.index + 1}"></td>
+                        <td th:text="${row.namasampah}"></td>
+                        <td th:text="${row.namajenis}"></td>
+                        <td th:text="${row.namasuk}"></td>
+                        <td th:text="${row.jumlahsampah}"></td>
+                        <td th:text="${row.hargatotal}"></td>
+                        <td th:text="${row.tanggal}"></td>
                     </tr>
                 </thead>
                 <tbody id="sampahList"></tbody>

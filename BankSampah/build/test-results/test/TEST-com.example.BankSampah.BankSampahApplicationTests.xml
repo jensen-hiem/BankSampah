@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.BankSampah.BankSampahApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-11-25T16:39:13" hostname="MSI" time="0.743">
+<testsuite name="com.example.BankSampah.BankSampahApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-12-02T14:55:47" hostname="RAYNER" time="0.595">
   <properties/>
-  <testcase name="contextLoads()" classname="com.example.BankSampah.BankSampahApplicationTests" time="0.743"/>
-  <system-out><![CDATA[23:39:11.050 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.BankSampah.BankSampahApplicationTests]: BankSampahApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-23:39:11.184 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.BankSampah.BankSampahApplication for test class com.example.BankSampah.BankSampahApplicationTests
+  <testcase name="contextLoads()" classname="com.example.BankSampah.BankSampahApplicationTests" time="0.595"/>
+  <system-out><![CDATA[21:55:45.820 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.BankSampah.BankSampahApplicationTests]: BankSampahApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:55:45.907 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.BankSampah.BankSampahApplication for test class com.example.BankSampah.BankSampahApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,10 +14,15 @@
 
  :: Spring Boot ::                (v3.4.0)
 
-2024-11-25T23:39:11.599+07:00  INFO 22572 --- [BankSampah] [    Test worker] c.e.B.BankSampahApplicationTests         : Starting BankSampahApplicationTests using Java 17.0.9 with PID 22572 (started by Jensen in C:\Users\Jensen\BankSampah\BankSampah)
-2024-11-25T23:39:11.601+07:00  INFO 22572 --- [BankSampah] [    Test worker] c.e.B.BankSampahApplicationTests         : No active profile set, falling back to 1 default profile: "default"
-2024-11-25T23:39:12.813+07:00  INFO 22572 --- [BankSampah] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2024-11-25T23:39:13.746+07:00  INFO 22572 --- [BankSampah] [    Test worker] c.e.B.BankSampahApplicationTests         : Started BankSampahApplicationTests in 2.399 seconds (process running for 3.612)
+2024-12-02T21:55:46.234+07:00  INFO 5444 --- [BankSampah] [    Test worker] c.e.B.BankSampahApplicationTests         : Starting BankSampahApplicationTests using Java 21.0.5 with PID 5444 (started by M3St in D:\Manpro\BankSampah\BankSampah)
+2024-12-02T21:55:46.235+07:00  INFO 5444 --- [BankSampah] [    Test worker] c.e.B.BankSampahApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2024-12-02T21:55:47.277+07:00  INFO 5444 --- [BankSampah] [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-12-02T21:55:47.759+07:00  INFO 5444 --- [BankSampah] [    Test worker] c.e.B.BankSampahApplicationTests         : Started BankSampahApplicationTests in 1.723 seconds (process running for 2.72)
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build what is described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\GIGABYTE\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.15.10\e8eb255b2c378b9a6c7341e7b0e12f0a5636377\byte-buddy-agent-1.15.10.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
 </testsuite>

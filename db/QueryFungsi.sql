@@ -29,18 +29,22 @@ INNER JOIN (
 INNER JOIN Harga ON Harga.idSampah = Sampah.idSampah AND Harga.tanggalUbah = Latest.updateTerbaru;
 
 
-
+--DONE
 -- Histori setoran sampah
 SELECT
-    Transaksi.tanggal,
     Sampah.namaSampah,
+	JenisSampah.namajenis,
+	SUK.namaSuk,
     TransaksiSampah.jumlahSampah,
-    TransaksiSampah.hargaTotal
+    TransaksiSampah.hargaTotal,
+	Transaksi.tanggal
 FROM
     Member
 INNER JOIN Transaksi ON Member.idPengguna = Transaksi.idPengguna
 INNER JOIN TransaksiSampah ON Transaksi.idTransaksi = TransaksiSampah.idTransaksi
 INNER JOIN Sampah ON TransaksiSampah.idSampah = Sampah.idSampah
+INNER JOIN JenisSampah ON Sampah.idjenissampah = JenisSampah.idjenissampah
+INNER JOIN SUK ON Sampah.idsuk =  SUK.idsuk
 WHERE
     Member.idPengguna = (
         SELECT idPengguna
