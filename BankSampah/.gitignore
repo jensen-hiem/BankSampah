@@ -1,1 +1,19 @@
+# Gradle
 .gradle/
+build/
+
+# IDE files
+.vscode/
+.idea/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Gradle wrapper files
+gradle-wrapper.jar
+gradle-wrapper.properties
+
+# Java build output
+*.class
+*.jar
