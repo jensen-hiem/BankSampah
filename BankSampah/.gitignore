@@ -1,37 +1,37 @@
-# Gradle
+#Gradle
 .gradle/
 build/
 .gradle/wrapper/dists/
 
-# IDE files
+#IDE files
 .vscode/
 .idea/
 *.iml
 
-# Operating System files
+#Operating System files
 .DS_Store
 Thumbs.db
 .swp
 
-# Gradle wrapper files
+#Gradle wrapper files
 gradle-wrapper.jar
 
-# Java build output
+#Java build output
 *.class
 *.jar
 *.war
 *.ear
 
-# Log files
-*.log
+#Log files
+.log
 
-# Testing and output
+#Testing and output
 /test-output/
 
-# Configuration files
+#Configuration files
 application.properties
 application.yml
-application-*.properties
+application-.properties
 application-*.yml
 .env
 .env.local
