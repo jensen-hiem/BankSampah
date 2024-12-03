@@ -85,22 +85,22 @@
                         <th>Nama Sampah</th>
                         <th>Jenis Sampah</th>
                         <th>Satuan</th>
-                        <th>Jumlah Sampah</th>
-                        <th>Harga Total</th>
+                        <th>Harga beli</th>
                         <th>Tanggal</th>
                         <th>Aksi</th>
                     </tr>
+                </thead>
+                <tbody>
                     <tr th:each="row, stat : ${results}">
                         <td th:text="${stat.index + 1}"></td>
-                        <td th:text="${row.namasampah}"></td>
-                        <td th:text="${row.namajenis}"></td>
-                        <td th:text="${row.namasuk}"></td>
-                        <td th:text="${row.jumlahsampah}"></td>
-                        <td th:text="${row.hargatotal}"></td>
-                        <td th:text="${row.tanggal}"></td>
+                        <td th:text="${row.namasampah}"></td> <!-- Correct property -->
+                        <td th:text="${row.namajenis}"></td> <!-- Correct property -->
+                        <td th:text="${row.namasuk}"></td> <!-- Correct property -->
+                        <td th:text="${row.hargasampah}"></td> <!-- Correct property -->
+                        <td th:text="${row.tanggalubah}"></td> <!-- Correct property -->
+                        <td><button>Aksi</button></td>
                     </tr>
-                </thead>
-                <tbody id="sampahList"></tbody>
+                </tbody>
             </table>
         </div>
 
@@ -126,7 +126,15 @@
                         <th>Keluarahan</th>
                     </tr>
                 </thead>
-                <tbody id="memberList"></tbody>
+                <tbody id="memberList">
+                    <tr th:each="row, stat : ${resultsz}">
+                        <td th:text="${stat.index + 1}"></td>
+                        <td th:text="${row.nama}"></td>
+                        <td th:text="${row.email}"></td>
+                        <td th:text="${row.nohp}"></td>
+                        <td th:text="${row.alamat}"></td>
+                        <td th:text="${row.kelurahanMember}"></td>
+                </tbody>
             </table>
         </div>
 
@@ -160,7 +168,15 @@
                         <th>Total Harga</th>
                     </tr>
                 </thead>
-                <tbody id="transaksiList"></tbody>
+                {% comment %} <tbody id="transaksiList">
+                        <tr th:each="row, stat : ${resultTransaksi}">
+                            <td th:text="${stat.index + 1}"></td>
+                            <td th:text="${row.nama}"></td>
+                            <td th:text="${row.email}"></td>
+                            <td th:text="${row.nohp}"></td>
+                            <td th:text="${row.alamat}"></td>
+                            <td th:text="${row.kelurahanMember}"></td>
+                </tbody> {% endcomment %}
             </table>
         </div>
 

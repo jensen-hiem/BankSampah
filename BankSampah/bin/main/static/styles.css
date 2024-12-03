@@ -11,9 +11,19 @@ nav button {
     background-color: #008CBA;
     color: white;
     border: none;
-    padding: 10px 20px;
-    margin: 0 10px;
+    padding: 10px 15px;
+    margin: 0 3px;
     cursor: pointer;
+    height: 50px;
+    font-size: 15px;
+    border-radius: 8px;
+    
+}
+button{
+    background-color:#008CBA;
+    color:white;
+    border-radius: 8px;
+
 }
 
 nav button:hover {
@@ -28,6 +38,7 @@ main {
     display: none;
 }
 
+
 h2 {
     color: #333;
 }
@@ -35,10 +46,12 @@ h2 {
 table {
     width: 100%;
     border-collapse: collapse;
+    margin:20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);;
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 1px solid black;
 }
 
 th, td {
