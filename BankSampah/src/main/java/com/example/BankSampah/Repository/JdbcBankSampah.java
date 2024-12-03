@@ -10,6 +10,7 @@
 
 import com.example.BankSampah.Model.JenisSampah;
 import com.example.BankSampah.Model.Member;
+import com.example.BankSampah.Model.Transaksi;
 
 @Repository
 public class JdbcBankSampah implements BankSampahRepository{
@@ -77,6 +78,10 @@ public class JdbcBankSampah implements BankSampahRepository{
             resultSet.getDate("tanggalubah")  
         );
     }
+    /* @Override
+    public String inputNamaSampah(String namaSampah, String jenisSampah, String SUK, float hargaBeli, String tanggal){
+
+    } */
     
     
 
@@ -103,6 +108,13 @@ public class JdbcBankSampah implements BankSampahRepository{
             resultSet.getString("nohp"), // Sama dengan alias di query
             resultSet.getString("alamat"),   // Sama dengan alias di query
             resultSet.getString("kelurahanMember") // Sama dengan alias di query
+        );
+    }
+
+    @Override
+    public Iterable<Transaksi> findAllTransaksiMember(){
+        return jdbc.query(
+            
         );
     }
     
