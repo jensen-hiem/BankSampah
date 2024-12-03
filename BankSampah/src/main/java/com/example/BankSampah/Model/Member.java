@@ -5,9 +5,10 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class Member {
-    private int idpengguna;
-    private String noHP;
-    private String alamat;
+    //private int idpengguna;
+    private String nama;
     private String email;
-    private int idKelurahan;
+    private String nohp;
+    private String alamat;
+    private String kelurahanMember;
 }

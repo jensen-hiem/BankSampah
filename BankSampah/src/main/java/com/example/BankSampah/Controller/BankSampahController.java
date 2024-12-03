@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.BankSampah.Model.JenisSampah;
+import com.example.BankSampah.Model.Member;
 import com.example.BankSampah.Repository.BankSampahRepository;
 
 @Controller
@@ -18,7 +19,9 @@ public class BankSampahController {
     @GetMapping("/")
     public String UIAdmin(Model model){
         Iterable<JenisSampah> jenisSampah = this.repo.findAllNamaSampah();
+        Iterable<Member> member=this.repo.findAllMember();
         model.addAttribute("results", jenisSampah);
+        model.addAttribute("resultsz", member);
 
         return "index";
     }

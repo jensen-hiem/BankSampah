@@ -7,7 +7,7 @@ public interface BankSampahRepository {
     Iterable<JenisSampah> findAllNamaSampah(); //1.
     // void updateHargaBeliSampah(float hargaBeli, String tanggal); //1.
 
-//     Iterable<Member> findAllMember(); //2.
+    Iterable<Member> findAllMember(); //2.
 
 //     String nambahDataMember(); //2.
 
