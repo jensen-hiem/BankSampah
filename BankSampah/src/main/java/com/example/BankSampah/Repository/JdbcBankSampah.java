@@ -111,12 +111,12 @@ public class JdbcBankSampah implements BankSampahRepository{
         );
     }
 
-    @Override
-    public Iterable<Transaksi> findAllTransaksiMember(){
-        return jdbc.query(
+    // @Override
+    // public Iterable<Transaksi> findAllTransaksiMember(){
+    //     return jdbc.query(
             
-        );
-    }
+    //     );
+    // }
     
     
 
