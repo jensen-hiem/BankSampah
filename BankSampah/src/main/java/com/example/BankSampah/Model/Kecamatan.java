@@ -1,16 +1,11 @@
 package com.example.BankSampah.Model;
 
-//import jakarta.persistence.*; // Untuk JPA anotasi seperti @Entity, @Id, @Column, dll
-import lombok.*; // Untuk Lombok anotasi seperti @Data, @NoArgsConstructor, @AllArgsConstructor
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Kecamatan {
-    private long idKec;
+    private int idKec;
     private String namaKec;
-
-
-    
 }

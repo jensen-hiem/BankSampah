@@ -1,0 +1,152 @@
+/* Body styling tetap */
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+/* Styling untuk header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Tambahkan sedikit background untuk kontras */
+}
+
+h1 {
+    margin: 0;
+    color: #28a745;
+    font-size: 28px;
+}
+
+header button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #0056b3;
+}
+
+/* Layout utama */
+main {
+    display: flex;
+    justify-content: space-between;
+    height: calc(100% - 60px); /* Sisa tinggi setelah dikurangi header */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Form tambah sampah */
+form {
+    width: 30%;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    height: fit-content; /* Agar form tidak memanjang */
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: bold;
+}
+
+form input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form input,
+form select {
+    box-sizing: border-box; /* Pastikan padding tidak memengaruhi ukuran elemen */
+}
+
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form select {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 10px;
+}
+
+form select:hover, 
+form select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.table-wrapper {
+    width: 65%; /* Ukuran tetap */
+    overflow-y: auto; /* Scroll ke bawah jika isi tabel melebihi tinggi maksimum */
+    border-radius: 10px; /* Tambahkan radius untuk estetika */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Tambahkan shadow */
+}
+
+/* Tabel data sampah diperbesar */
+table {
+    width: 100%; /* Selalu gunakan lebar penuh dari parent */
+    border-collapse: collapse;
+    table-layout: fixed; /* Kolom tabel tetap */
+    background-color: #fff;
+}
+
+table thead {
+    background-color: #28a745;
+    color: white;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    word-wrap: break-word; /* Pastikan teks tidak keluar dari kolom */
+}
+
+thead th {
+    position: sticky;
+    top: 0; /* Header tetap di atas ketika scroll */
+    background-color: #28a745;
+    color: white;
+    z-index: 2; /* Pastikan header selalu di atas konten */
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #e9ffe6;
+}

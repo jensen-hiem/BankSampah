@@ -1,14 +1,19 @@
 package com.example.BankSampah.Model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-@AllArgsConstructor
 @Data
+@AllArgsConstructor
+@Builder
 public class Member {
-    private int idpengguna; 
-    private String nohp;
-    private String alamat;
-    private String nama;
+    private Integer idPengguna;   // ID Pengguna sebagai Primary Key
+    private String nama;          // Nama dari tabel Pengguna
     private String email;
-    private int idKel;
+    private String noHp;
+    private String alamat;
+    private Integer idKel;        // ID Kelurahan
+    private String kelurahan;     // Nama Kelurahan (untuk tampilan)
 }
+
+
