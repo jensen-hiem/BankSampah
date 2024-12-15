@@ -103,6 +103,7 @@ public class jdbcRepoMember implements RepoMember {
     }
 
     private Laporan mapRowToLaporan(ResultSet rs, int rowNum) throws SQLException{
+        
         Laporan laporan= new Laporan();
         laporan.setTanggal(rs.getDate("tanggal"));
         laporan.setTotalPendapatan(rs.getLong("total_pendapatan"));
@@ -131,7 +132,7 @@ public class jdbcRepoMember implements RepoMember {
     }
     private Laporan mapRowToLaporanYear(ResultSet rs, int rowNum) throws SQLException{
         Laporan laporan= new Laporan();
-        laporan.setTahunBulan(rs.getInt("tahun"));
+        laporan.setTahunBulan(""+rs.getInt("tahun"));
         laporan.setTotalPendapatan(rs.getLong("total_pendapatan"));
         return laporan;
 
@@ -141,7 +142,7 @@ public class jdbcRepoMember implements RepoMember {
     @Override
     public Iterable<Laporan> findAllLaporanMonth(String username) {
         String sql = "SELECT " +
-               "    EXTRACT(MONTH FROM Transaksi.tanggal) AS bulan, " +
+               "    EXTRACT(MONTH FROM Transaksi.tanggal) AS bulan, EXTRACT(YEAR FROM Transaksi.tanggal) AS tahun," +
                "    SUM(TransaksiSampah.hargaTotal) AS total_pendapatan " +
                "FROM " +
                "    Transaksi " +
@@ -154,12 +155,17 @@ public class jdbcRepoMember implements RepoMember {
                "    ) " +
                "    AND tipeTransaksi = 1 " +
                "GROUP BY " +
-               "    EXTRACT(MONTH FROM Transaksi.tanggal);";
+               "    EXTRACT(MONTH FROM Transaksi.tanggal), EXTRACT(YEAR FROM Transaksi.tanggal);";
         return jdbcTemplate.query(sql,this::mapRowToLaporanMonth,username);
     }
     private Laporan mapRowToLaporanMonth(ResultSet rs, int rowNum) throws SQLException{
+        String[] bulan = {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"};
+
+        String currMonth = ""+bulan[rs.getInt("bulan")-1];
+        String currYear = ""+rs.getInt("tahun");
+        
         Laporan laporan= new Laporan();
-        laporan.setTahunBulan(rs.getInt("bulan"));
+        laporan.setTahunBulan(currMonth+" "+currYear);
         laporan.setTotalPendapatan(rs.getLong("total_pendapatan"));
         return laporan;
 

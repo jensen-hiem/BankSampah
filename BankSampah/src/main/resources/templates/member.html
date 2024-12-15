@@ -63,16 +63,22 @@
                 background-color: #45a049;
             }
 
-            header{
+            header {
                 grid-area: header;
                 background-color: #4CAF50;
-                color:white;
-                display:flex;
-                text-align: center;
+                color: white;
+                display: flex;
                 justify-content: center;
-                font-size:36px;
-                font-weight:bold;
+                align-items: center;
+                font-size: 36px;
+                font-weight: bold;
+                height: 100px; 
             }
+
+            header div {
+                text-align: center;
+            }
+
             .main{
                 grid-area: main;
                 background-color: white;
@@ -90,6 +96,20 @@
 
             #akun{
                 margin-top: auto;
+            }
+            
+            #akun > button{
+                display: flex;
+                box-sizing: border-box;
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+                height: 38;
+            }
+            
+            #akun > button > a{
+                align-items: center;
             }
 
             table {
@@ -138,17 +158,19 @@
     </head>
     <body>
         <div class="container">
-            <header>Bank Sampah</header>
+            <header>
+                <div>Bank Sampah</div>
+            </header>
 
             <div class="sidebar">
                 <div class="profile">
                     <img src="https://via.placeholder.com/100" alt="Profile Picture">
                     <p th:text="${user}">Nama Pengguna</p>
                 </div>
-                <button class="active"><a href="/member1">Lihat Harga Beli Sampah</a></button>
+                <button class="active"><a href="/member1">Lihat Harga Jual Sampah</a></button>
                 <button><a href="/member2">Riwayat Setoran Sampah</a></button>
                 <button><a href="/member3">Laporan Pendapatan Setoran</a></button>
-                <div id="akun" style="margin-top: auto;">
+                <div id="akun">
                     <button><a href="/">Logout</a></button>
                 </div>
             </div>
@@ -158,15 +180,17 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>Nama Sampah</th>
-                                <th>Harga Sampah(dalam satuan rupiah)</th>
+                                <th>Harga Sampah</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Thymeleaf Loop -->
-                            <tr th:each="sampah : ${daftar}">
+                            <tr th:each="sampah, stat : ${daftar}">
+                                <td th:text="${stat.index+1}">No</td>
                                 <td th:text="${sampah.namasampah}">Nama Sampah</td>
-                                <td th:text="${sampah.hargasampah}">Harga Sampah</td>
+                                <td th:text="Rp. + ${sampah.hargasampah}">Harga Sampah</td>
                             </tr>
                         </tbody>
                     </table>

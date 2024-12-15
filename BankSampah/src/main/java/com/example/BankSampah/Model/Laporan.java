@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 public class Laporan {
     private Date tanggal;
-    private int tahunBulan;
+    private String tahunBulan;
     private long totalPendapatan;
 }
