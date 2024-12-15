@@ -1,14 +1,15 @@
 package com.example.BankSampah.Model;
 
-import java.time.LocalDate;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
+import java.util.Date;
+
 @Data
+@AllArgsConstructor
 public class Harga {
-    private int idHarga;
-    private LocalDate tanggalUbah;
-    private int hargaSampah;
+    private int idSampah;       // Representasi kolom idSampah
+    private Date tanggalUbah;   // Representasi kolom tanggalUbah
+    private int hargaSampah;    // Representasi kolom hargaSampah
 }
+
