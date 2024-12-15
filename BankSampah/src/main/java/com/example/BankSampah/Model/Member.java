@@ -12,3 +12,4 @@ public class Member {
     private String alamat;
     private String kelurahanMember;
 }
+

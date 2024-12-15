@@ -1,0 +1,231 @@
+<html>
+    <head>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Arial,sans-serif;
+            }
+            body {
+                background-color: #f0f8ff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+            }
+            .container{
+                display: grid;
+                width: 1600px;
+                height: 900px;
+                grid-template-columns: 300px 1fr;
+                grid-template-rows: 100px 1fr;
+                gap:10px;
+                grid-template-areas:
+                "header header"
+                "sidebar main";
+                background-color:white;
+                border-radius: 10px;
+            }
+
+            .sidebar{
+                grid-area: sidebar;
+                background-color: #f7f7f7;
+                border-right: 1px solid #e0e0e0;
+                display: flex;
+                flex-direction: column;
+                gap:15px;
+                margin-right:20px;
+            }
+
+            .sidebar button, button {
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            .sidebar button a {
+                color: white;
+                text-decoration: none;
+                display: block;
+                height: 100%;
+                width: 100%;
+            }
+
+            .sidebar button:hover {
+                background-color: #45a049;
+            }
+
+            header{
+                grid-area: header;
+                background-color: #4CAF50;
+                color:white;
+                display:flex;
+                text-align: center;
+                justify-content: center;
+                font-size:36px;
+                font-weight:bold;
+            }
+            .main{
+                grid-area: main;
+                background-color: white;
+                padding: 20px;
+                display:flex;
+                align-items: center;
+                flex-direction: column;
+                gap:20px;
+            }
+            h2{
+                font-size:22px;
+                color:black;
+                margin-right:50px;
+            }
+
+            #akun{
+                margin-top: auto;
+            }
+            table {
+                width: 80%;
+                border-collapse: collapse;
+                margin: 0 auto;
+            }
+            
+            th, td {
+                padding: 5px 8px;
+                border: 1px solid #ddd;
+                text-align: center;
+            }
+            
+            
+            table thead{
+                background-color:#4CAF50;
+                color:white;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+            .sidebar button.active {
+                background-color: #1B5E20;
+                transform: translateY(2px); /* Membuat tombol terlihat lebih turun */
+            }
+            .profile {
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            .profile img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+            .profile p {
+                font-size: 18px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            .filter-header{
+                display:flex;
+                flex-direction:column;
+                align-items: flex-start;
+                width:80%;
+                margin:15px auto ;
+            }
+            .filter-options {
+                display: flex;
+                gap: 15px;
+                align-items: center;
+            }
+
+            .filter-options span {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            form {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            label {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+            }
+            table {
+                margin-top: 20px;
+            }
+            
+        </style>
+        <meta charset="UTF-8" >
+        <title>Bank Sampah: Home</title>
+    </head>
+    <body>
+        <div class="container">
+            <header>Bank Sampah</header>
+            <div class="sidebar">
+                <div class="profile">
+                    <img src="https://via.placeholder.com/100" alt="Profile Picture">
+                    <p th:text="${user}">Nama Pengguna</p>
+                </div>
+                <button><a href="/member1">Lihat Harga Beli Sampah</a></button>
+                <button ><a href="/member2">Riwayat Setoran Sampah</a></button>
+                <button  class="active"><a href="/member3">Laporan Pendapatan Setoran</a></button>
+                <div id="akun" style="margin-top: auto;">
+                    <button><a href="/">Logout</a></button>
+                </div>
+            </div>
+
+            <div class="main">
+                <h2>Laporan Pendapatan:</h2>
+                <div class="filter-header">
+                    <div class="filter-options">
+                        <span>Filter berdasarkan:</span>
+                        <form action="/member3" method="get">
+                            <label>
+                                <input type="radio" name="filter" value="semua" 
+                                       th:checked="${filter == 'semua'}"> Semua
+                            </label>
+                            <label>
+                                <input type="radio" name="filter" value="tahun" 
+                                       th:checked="${filter == 'tahun'}"> Tahun
+                            </label>
+                            <label>
+                                <input type="radio" name="filter" value="bulan" 
+                                       th:checked="${filter == 'bulan'}"> Bulan
+                            </label>
+                            <button type="submit">Filter</button>
+                        </form>
+                    </div>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                                <!-- Tampilkan header sesuai filter -->
+                                <th th:if="${filter == 'semua'}">Tanggal</th>
+                                <th th:if="${filter == 'bulan'}">Bulan</th>
+                                <th th:if="${filter == 'tahun'}">Tahun</th>
+                                <th>Total Pendapatan</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="laporanData : ${laporan}">
+                                <!-- Tampilkan kolom sesuai filter -->
+                                <td th:if="${filter == 'semua'}" th:text="${laporanData.tanggal}"></td>
+                                <td th:if="${filter == 'bulan'}" th:text="${laporanData.tahunBulan}"></td>
+                                <td th:if="${filter == 'tahun'}" th:text="${laporanData.tahunBulan}"></td>
+                                <td th:text="${laporanData.totalPendapatan}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

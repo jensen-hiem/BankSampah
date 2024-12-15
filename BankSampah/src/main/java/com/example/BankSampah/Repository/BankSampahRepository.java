@@ -11,7 +11,7 @@ public interface BankSampahRepository {
 
 //     String nambahDataMember(); //2.
 
-    Iterable<Transaksi> findAllTransaksiMember(); //3.
+    //Iterable<Transaksi> findAllTransaksiMember(); //3.
 //     String inputTransaksiMember(String username, String tanggal, JenisSampah x, int jumlahSampah); //3. Masukin Transaksi
     
 //     Iterable<Transaksi> findAllTransaksiBankSampah()//4.
