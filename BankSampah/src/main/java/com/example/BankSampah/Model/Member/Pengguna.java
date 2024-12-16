@@ -24,4 +24,5 @@ public class Pengguna {
     private String nama;
 
     private String password;
+    private String roles;
 }

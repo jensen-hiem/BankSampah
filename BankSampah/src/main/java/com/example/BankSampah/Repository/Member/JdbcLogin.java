@@ -20,7 +20,17 @@ public class JdbcLogin implements loginRepository {
 
     @Override
     public List<Pengguna> findUserByUsername(String username) {
-        String sql = "select * from pengguna where username = ?";
+        String sql = 
+        "SELECT * FROM (\n" + //
+                        "SELECT Pengguna.idPengguna, username, Pengguna.password, nama, 'Member' AS roles\n" + //
+                        "FROM Member \n" + //
+                        "JOIN Pengguna ON Pengguna.idPengguna = Member.idPengguna\n" + //
+                        "UNION ALL\n" + //
+                        "SELECT Pengguna.idPengguna, username, Pengguna.password, nama, 'IbuBS' AS roles\n" + //
+                        "FROM Pengguna \n" + //
+                        "JOIN IbuBS ON IbuBS.idPengguna = Pengguna.idPengguna\n" + //
+                        "ORDER BY idPengguna\n" + //
+                        ") WHERE username = ?";
         return jdbcTemplate.query(sql, this::mapRowToUsers, username);
     }
 
@@ -29,28 +39,8 @@ public class JdbcLogin implements loginRepository {
             rs.getInt("idpengguna"),
             rs.getString("username"),
             rs.getString("nama"),
-            rs.getString("password")
+            rs.getString("password"),
+            rs.getString("roles")
         );
     }
-
-    @Override
-public int findAdminid(int userId) {
-    String sql = "SELECT idpengguna FROM pengguna WHERE idpengguna = ? AND idpengguna IN (8, 9)";
-    try {
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, Integer.class);
-    } catch (EmptyResultDataAccessException e) {
-        return -1; // Tidak ditemukan
-    }
-}
-
-@Override
-public int findMember(int userId) {
-    String sql = "SELECT idpengguna FROM pengguna WHERE idpengguna = ? AND idpengguna NOT IN (8, 9)";
-    try {
-        return jdbcTemplate.queryForObject(sql, new Object[]{userId}, Integer.class);
-    } catch (EmptyResultDataAccessException e) {
-        return -1; // Tidak ditemukan
-    }
-}
-
 }

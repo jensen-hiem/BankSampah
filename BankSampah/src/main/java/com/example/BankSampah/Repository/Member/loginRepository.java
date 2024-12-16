@@ -5,7 +5,4 @@ import com.example.BankSampah.Model.Member.*;
 
 public interface loginRepository {
     List<Pengguna> findUserByUsername(String username);
-    int findAdminid(int userId);
-    int findMember(int userId);
-    
 }

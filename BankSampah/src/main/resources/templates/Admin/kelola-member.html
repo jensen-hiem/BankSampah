@@ -30,8 +30,12 @@
             <textarea id="alamat" name="alamat" required></textarea>
 
             <label for="kelurahan">Kelurahan:</label>
-            <input type="text" id="kelurahan" name="kelurahan" required>
+            <!-- <input type="text" id="kelurahan" name="kelurahan" required> -->
 
+            <select name="kelurahan" id="kelurahan">
+                <option th:each="li : ${listKelurahan}" th:value="${li.namaKel}" th:text="${li.namaKel}" name="kelurahan"></option>
+              </select>
+            
             <button type="submit">Tambah Member</button>
         </form>
 

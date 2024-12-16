@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/admin/member")
 public class MemberController {
     private final MemberService memberService;
     private final KelurahanService kelurahanService;
@@ -23,7 +22,7 @@ public class MemberController {
         this.kelurahanService = kelurahanService;
     }
 
-    @GetMapping
+    @GetMapping("/kelola-member")
     public String getAllMembers(Model model) {
         List<Member> listMember = memberService.getAllMembers();
         model.addAttribute("listMember", listMember);
@@ -34,7 +33,7 @@ public class MemberController {
         return "Admin/kelola-member";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/member/add")
     public String addMember(@ModelAttribute Member member, @RequestParam String kelurahan) {
         Kelurahan foundKelurahan = kelurahanService.getKelurahanByName(kelurahan);
         if (foundKelurahan != null) {
@@ -44,7 +43,7 @@ public class MemberController {
         }
 
         memberService.addMember(member);
-        return "redirect:/member";
+        return "redirect:/kelola-member";
     }
 
 

@@ -25,17 +25,14 @@ public class LoginService {
     
         if (!user.getPassword().equals(password)) {
             return "Wrong password!";
-        }
-    
-        int adminId = loginRepository.findAdminid(user.getIdPengguna());
-        if (adminId != -1) {
+        } 
+
+        if(user.getRoles().equals("Member")){
+            return "Welcome Member: " + user.getNama();
+        } else if (user.getRoles().equals("IbuBS")){
             return "Welcome Admin: " + user.getNama();
         }
-    
-        int memberId = loginRepository.findMember(user.getIdPengguna());
-        if (memberId != -1) {
-            return "Welcome Member: " + user.getNama();
-        }
+
     
         return "User role unknown!";
     }
