@@ -11,6 +11,8 @@ DROP TABLE IF EXISTS BSPusat;
 DROP TABLE IF EXISTS Kelurahan;
 DROP TABLE IF EXISTS Kecamatan;
 
+
+
 CREATE TABLE Kecamatan (
     idKec SERIAL PRIMARY KEY,
     namaKec VARCHAR(20) NOT NULL
@@ -23,7 +25,7 @@ CREATE TABLE Kelurahan (
 );
 
 CREATE TABLE Pengguna (
-    idPengguna SERIAL PRIMARY KEY,
+    idPengguna INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     nama VARCHAR(30),
     username VARCHAR(30)
 );
@@ -67,7 +69,7 @@ CREATE TABLE SUK (
 );
 
 CREATE TABLE Sampah (
-    idSampah SERIAL PRIMARY KEY,
+    idSampah INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     namaSampah VARCHAR(40) NOT NULL,
     idJenisSampah INT NOT NULL REFERENCES JenisSampah(idJenisSampah),
     idSUK INT NOT NULL REFERENCES SUK(idSUK)
@@ -294,11 +296,11 @@ VALUES
 --buat fitur member sama sampah ini harus diinsert dulu (sampai suk)
 
 -- Insert data into Pengguna
-INSERT INTO Pengguna (idPengguna, nama, username, password) VALUES
-(1, 'Dina', 'dina123', 'password123'),
-(2, 'Rudi', 'rudi456', 'password456'),
-(3, 'Siti', 'siti789', 'password789'),
-(4, 'Ahmad', 'ahmad321', 'password321');
+INSERT INTO Pengguna (nama, username, password) VALUES
+('Dina', 'dina123', 'password123'),
+('Rudi', 'rudi456', 'password456'),
+('Siti', 'siti789', 'password789'),
+('Ahmad', 'ahmad321', 'password321');
 
 -- Insert data into IbuBS
 INSERT INTO IbuBS (idPengguna, password) VALUES
@@ -321,9 +323,9 @@ INSERT INTO Transaksi (idTransaksi, tanggal, tipeTransaksi, idPengguna, idBSPusa
 (2, '2024-01-11', 2, 4, 2);
 
 -- Insert data into Sampah
-INSERT INTO Sampah (idSampah, namaSampah, idJenisSampah, idSUK) VALUES
-(1, 'Botol Plastik', 1, 1),
-(2, 'Kardus', 2, 2);
+INSERT INTO Sampah (namaSampah, idJenisSampah, idSUK) VALUES
+('Botol Plastik', 1, 1),
+('Kardus', 2, 2);
 
 -- Insert data into TransaksiSampah
 INSERT INTO TransaksiSampah (idTransaksi, idSampah, jumlahSampah, hargaTotal) VALUES
@@ -336,148 +338,186 @@ INSERT INTO Harga (idSampah, tanggalUbah, hargaSampah) VALUES
 (2, '2024-01-01', 6000);
 
 
+-- SELECT * FROM Harga;
+-- SELECT * FROM TransaksiSampah;
+-- SELECT * FROM Sampah;
+-- SELECT * FROM SUK;
+-- SELECT * FROM JenisSampah;
+-- SELECT * FROM Transaksi;
+-- SELECT * FROM Member;
+-- SELECT * FROM IbuBS;
+-- SELECT * FROM Pengguna;
+-- SELECT * FROM BSPusat;
+-- SELECT * FROM Kelurahan;
+-- SELECT * FROM Kecamatan;
 
-
-
---QUERY LAMA
-INSERT INTO Sampah (idSampah, namaSampah, idJenisSampah, idSUK)
-VALUES
-	(1, 'Botol Plastik 600ml', 1, 2),
-	(2, 'Botol Sirup', 2, 2),
-	(3, 'Kaleng Minuman Ringan', 4, 1),
-	(4, 'Tas Belanja Kertas', 3, 2),
-	(5, 'Dokumen Bekas', 3, 1),
-	(6, 'Piring Beling', 2, 1),
-	(7, 'Alat Makan Bekas', 4, 1),
-	(8, 'Karton Bekas', 3, 1),
-	(9, 'Botol Plastik 300ml', 1, 2),
-	(10, 'Buku Bekas', 3, 1),
-	(11, 'Botol Parfum', 2, 2),
-	(12, 'Kantong Kresek Bekas', 1, 1),
-	(13, 'Paku Bekas', 4, 1);
+-- SELECT s.idSampah, s.namaSampah, j.idJenisSampah, j.namaJenis AS jenisSampah,suk.idSUK, suk.namaSUK AS satuan,
+-- h.hargaSampah AS hargaBeli, h.tanggalUbah AS tanggal
+-- FROM Sampah s
+-- JOIN JenisSampah j ON s.idJenisSampah = j.idJenisSampah
+-- JOIN SUK suk ON s.idSUK = suk.idSUK
+-- LEFT JOIN Harga h ON s.idSampah = h.idSampah
+-- WHERE h.tanggalUbah = (SELECT MAX(tanggalUbah) 
+-- FROM Harga WHERE idSampah = s.idSampah);
 	
-INSERT INTO Harga (idSampah, tanggalUbah, hargaSampah)
-VALUES 
-	(1, '20240512', 2000),
-	(1, '20240221', 1500),
-	(2, '20240117', 3000),
-	(3, '20231227', 2000),
-	(3, '20231110', 2500),
-	(4, '20240322', 1500),
-	(5, '20240101', 1000),
-	(6, '20230911', 2000),
-	(7, '20240214', 3000),
-	(8, '20240122', 1000),
-	(8, '20240116', 1500),
-	(9, '20240322', 1500),
-	(10, '20240214', 1200),
-	(11, '20240221', 1000),
-	(11, '20240318', 1100),
-	(12, '20240101', 2000),
-	(13, '20240322', 3500);
+-- SELECT * FROM Member JOIN Pengguna ON Pengguna.idPengguna = Member.idPengguna 
+-- SELECT Pengguna.idpengguna, username, Pengguna.password FROM Pengguna JOIN IbuBS ON  IbuBS.idpengguna = Pengguna.idPengguna
 
-INSERT INTO Pengguna (idPengguna, nama, username)
-VALUES
-	(1, 'Asep', 'Asep'),
-	(2, 'Budi', 'Budi'),
-	(3, 'Cecep', 'Cecep'),
-	(4, 'Dodi', 'Dodi'),
-	(5, 'Eko', 'Eko'),
-	(6, 'Farzan', 'Farzan'),
-	(7, 'Gibran', 'Gibran'),
-	(8, 'Hani',  'Hani'),
-	(9, 'Ina', 'Ina'),
-	(10, 'Joko','Joko');
+-- SELECT * FROM (
+-- SELECT Pengguna.idPengguna, username, Pengguna.password, nama, 'Member' AS roles
+-- FROM Member 
+-- JOIN Pengguna ON Pengguna.idPengguna = Member.idPengguna
+-- UNION ALL
+-- SELECT Pengguna.idPengguna, username, Pengguna.password, nama, 'IbuBS' AS roles
+-- FROM Pengguna 
+-- JOIN IbuBS ON IbuBS.idPengguna = Pengguna.idPengguna
+-- ORDER BY idPengguna
+-- ) WHERE username = 'rudi456'
 
-INSERT INTO Member (idPengguna, noHP, alamat, email, idKel)
-VALUES
-	(1, '081230334512', 'Jl. Kembang Jati no.33', 'asep21@gmail.com', 23),
-	(2, '081237788902', 'Anggrek Residen Cluster 3 no.22A', 'bubudidi@gmail.com', 62),
-	(3, '081918723823', 'Jl. Nagasari no.12', 'c3c3p@gmail.com', 67),
-	(4, '081128343829', 'Jl. Mercon no.42', 'dodiForever@gmail.com', 29),
-	(5, '081872817388', 'Jl. Camilla no.2B', 'xxEKOxx@gmail.com', 135),
-	(6, '081123456791', 'Jl. Rawon no.19', 'farzan123@gmail.com', 20),
-	(7, '081557783922', 'Jl. Putik Manis no.40', 'gibran1990@gmail.com', 40),
-	(10, '081233419929', 'Jl. Putik Manis no.40', 'JokoWee@gmail.com', 40);
+-- SELECT * FROM Pengguna WHERE userId = ''
 
-INSERT INTO IbuBS (idPengguna, password)
-VALUES
-	(8, 'hani123'),
-	(9, 'qwertyuiop');
-
-INSERT INTO Transaksi (idTransaksi, tanggal, tipeTransaksi, idPengguna, idBSPusat)
-VALUES
-	(1, '20240321', 1, 7, null),
-	(2, '20240602', 1, 10, null),
-	(3, '20240302', 2, null, 2),
-	(4, '20240211', 2, null, 2);
-
-INSERT INTO TransaksiSampah (idTransaksi, idSampah, jumlahSampah, hargaTotal)
-VALUES
-    (1, 1, 4, 4 * (
-        SELECT hargaSampah
-        FROM Sampah
-        INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
-        WHERE Sampah.idSampah = 1
-          AND Harga.tanggalUbah <= (
-              SELECT tanggal
-              FROM Transaksi
-              WHERE idTransaksi = 1
-          )
-        ORDER BY Harga.tanggalUbah DESC
-        LIMIT 1
-    )),
-    (2, 1, 4, 4 * (
-        SELECT hargaSampah
-        FROM Sampah
-        INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
-        WHERE Sampah.idSampah = 1
-          AND Harga.tanggalUbah <= (
-              SELECT tanggal
-              FROM Transaksi
-              WHERE idTransaksi = 2
-          )
-        ORDER BY Harga.tanggalUbah DESC
-        LIMIT 1
-    )),
-    (2, 5, 5, 5 * (
-        SELECT hargaSampah
-        FROM Sampah
-        INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
-        WHERE Sampah.idSampah = 5
-          AND Harga.tanggalUbah <= (
-              SELECT tanggal
-              FROM Transaksi
-              WHERE idTransaksi = 2
-          )
-        ORDER BY Harga.tanggalUbah DESC
-        LIMIT 1
-    )),
-    (3, 1, 2, 2 * (
-        SELECT hargaSampah
-        FROM Sampah
-        INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
-        WHERE Sampah.idSampah = 1
-          AND Harga.tanggalUbah <= (
-              SELECT tanggal
-              FROM Transaksi
-              WHERE idTransaksi = 3
-          )
-        ORDER BY Harga.tanggalUbah DESC
-        LIMIT 1
-    )),
-    (4, 3, 2, 2 * (
-        SELECT hargaSampah
-        FROM Sampah
-        INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
-        WHERE Sampah.idSampah = 3
-          AND Harga.tanggalUbah <= (
-              SELECT tanggal
-              FROM Transaksi
-              WHERE idTransaksi = 4
-          )
-        ORDER BY Harga.tanggalUbah DESC
-        LIMIT 1
-    ));
+-- INSERT INTO Pengguna (nama, username, password) VALUES
 
 
+-- ('Dode', 'dodo1232', 'password123e')
+
+-- --QUERY LAMA
+-- INSERT INTO Sampah (idSampah, namaSampah, idJenisSampah, idSUK)
+-- VALUES
+-- 	(1, 'Botol Plastik 600ml', 1, 2),
+-- 	(2, 'Botol Sirup', 2, 2),
+-- 	(3, 'Kaleng Minuman Ringan', 4, 1),
+-- 	(4, 'Tas Belanja Kertas', 3, 2),
+-- 	(5, 'Dokumen Bekas', 3, 1),
+-- 	(6, 'Piring Beling', 2, 1),
+-- 	(7, 'Alat Makan Bekas', 4, 1),
+-- 	(8, 'Karton Bekas', 3, 1),
+-- 	(9, 'Botol Plastik 300ml', 1, 2),
+-- 	(10, 'Buku Bekas', 3, 1),
+-- 	(11, 'Botol Parfum', 2, 2),
+-- 	(12, 'Kantong Kresek Bekas', 1, 1),
+-- 	(13, 'Paku Bekas', 4, 1);
+	
+-- INSERT INTO Harga (idSampah, tanggalUbah, hargaSampah)
+-- VALUES 
+-- 	(1, '20240512', 2000),
+-- 	(1, '20240221', 1500),
+-- 	(2, '20240117', 3000),
+-- 	(3, '20231227', 2000),
+-- 	(3, '20231110', 2500),
+-- 	(4, '20240322', 1500),
+-- 	(5, '20240101', 1000),
+-- 	(6, '20230911', 2000),
+-- 	(7, '20240214', 3000),
+-- 	(8, '20240122', 1000),
+-- 	(8, '20240116', 1500),
+-- 	(9, '20240322', 1500),
+-- 	(10, '20240214', 1200),
+-- 	(11, '20240221', 1000),
+-- 	(11, '20240318', 1100),
+-- 	(12, '20240101', 2000),
+-- 	(13, '20240322', 3500);
+
+-- INSERT INTO Pengguna (idPengguna, nama, username)
+-- VALUES
+-- 	(1, 'Asep', 'Asep'),
+-- 	(2, 'Budi', 'Budi'),
+-- 	(3, 'Cecep', 'Cecep'),
+-- 	(4, 'Dodi', 'Dodi'),
+-- 	(5, 'Eko', 'Eko'),
+-- 	(6, 'Farzan', 'Farzan'),
+-- 	(7, 'Gibran', 'Gibran'),
+-- 	(8, 'Hani',  'Hani'),
+-- 	(9, 'Ina', 'Ina'),
+-- 	(10, 'Joko','Joko');
+
+-- INSERT INTO Member (idPengguna, noHP, alamat, email, idKel)
+-- VALUES
+-- 	(1, '081230334512', 'Jl. Kembang Jati no.33', 'asep21@gmail.com', 23),
+-- 	(2, '081237788902', 'Anggrek Residen Cluster 3 no.22A', 'bubudidi@gmail.com', 62),
+-- 	(3, '081918723823', 'Jl. Nagasari no.12', 'c3c3p@gmail.com', 67),
+-- 	(4, '081128343829', 'Jl. Mercon no.42', 'dodiForever@gmail.com', 29),
+-- 	(5, '081872817388', 'Jl. Camilla no.2B', 'xxEKOxx@gmail.com', 135),
+-- 	(6, '081123456791', 'Jl. Rawon no.19', 'farzan123@gmail.com', 20),
+-- 	(7, '081557783922', 'Jl. Putik Manis no.40', 'gibran1990@gmail.com', 40),
+-- 	(10, '081233419929', 'Jl. Putik Manis no.40', 'JokoWee@gmail.com', 40);
+
+-- INSERT INTO IbuBS (idPengguna, password)
+-- VALUES
+-- 	(8, 'hani123'),
+-- 	(9, 'qwertyuiop');
+
+-- INSERT INTO Transaksi (idTransaksi, tanggal, tipeTransaksi, idPengguna, idBSPusat)
+-- VALUES
+-- 	(1, '20240321', 1, 7, null),
+-- 	(2, '20240602', 1, 10, null),
+-- 	(3, '20240302', 2, null, 2),
+-- 	(4, '20240211', 2, null, 2);
+
+-- INSERT INTO TransaksiSampah (idTransaksi, idSampah, jumlahSampah, hargaTotal)
+-- VALUES
+--     (1, 1, 4, 4 * (
+--         SELECT hargaSampah
+--         FROM Sampah
+--         INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
+--         WHERE Sampah.idSampah = 1
+--           AND Harga.tanggalUbah <= (
+--               SELECT tanggal
+--               FROM Transaksi
+--               WHERE idTransaksi = 1
+--           )
+--         ORDER BY Harga.tanggalUbah DESC
+--         LIMIT 1
+--     )),
+--     (2, 1, 4, 4 * (
+--         SELECT hargaSampah
+--         FROM Sampah
+--         INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
+--         WHERE Sampah.idSampah = 1
+--           AND Harga.tanggalUbah <= (
+--               SELECT tanggal
+--               FROM Transaksi
+--               WHERE idTransaksi = 2
+--           )
+--         ORDER BY Harga.tanggalUbah DESC
+--         LIMIT 1
+--     )),
+--     (2, 5, 5, 5 * (
+--         SELECT hargaSampah
+--         FROM Sampah
+--         INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
+--         WHERE Sampah.idSampah = 5
+--           AND Harga.tanggalUbah <= (
+--               SELECT tanggal
+--               FROM Transaksi
+--               WHERE idTransaksi = 2
+--           )
+--         ORDER BY Harga.tanggalUbah DESC
+--         LIMIT 1
+--     )),
+--     (3, 1, 2, 2 * (
+--         SELECT hargaSampah
+--         FROM Sampah
+--         INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
+--         WHERE Sampah.idSampah = 1
+--           AND Harga.tanggalUbah <= (
+--               SELECT tanggal
+--               FROM Transaksi
+--               WHERE idTransaksi = 3
+--           )
+--         ORDER BY Harga.tanggalUbah DESC
+--         LIMIT 1
+--     )),
+--     (4, 3, 2, 2 * (
+--         SELECT hargaSampah
+--         FROM Sampah
+--         INNER JOIN Harga ON Sampah.idSampah = Harga.idSampah
+--         WHERE Sampah.idSampah = 3
+--           AND Harga.tanggalUbah <= (
+--               SELECT tanggal
+--               FROM Transaksi
+--               WHERE idTransaksi = 4
+--           )
+--         ORDER BY Harga.tanggalUbah DESC
+--         LIMIT 1
+--     ));
