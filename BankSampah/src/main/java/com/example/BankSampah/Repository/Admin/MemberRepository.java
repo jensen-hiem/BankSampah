@@ -1,8 +1,9 @@
-package com.example.BankSampah.Repository;
+package com.example.BankSampah.Repository.Admin;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import com.example.BankSampah.Model.Member;
+
+import com.example.BankSampah.Model.Admin.Member;
 
 import java.util.List;
 
@@ -34,22 +35,23 @@ public class MemberRepository {
     }
 
     public int save(Member member) {
-        String insertPengguna = "INSERT INTO pengguna (nama) VALUES (?) RETURNING idPengguna";
-        Integer idPengguna = jdbcTemplate.queryForObject(insertPengguna, Integer.class, member.getNama());
+        String insertPengguna = "INSERT INTO Pengguna (nama, username, password) VALUES (?, ?, 'password') RETURNING idPengguna";
+
+        Integer idPengguna = jdbcTemplate.queryForObject(insertPengguna, Integer.class, member.getNama(), member.getNama());
 
         if (idPengguna == null) {
             throw new RuntimeException("Gagal mendapatkan ID pengguna baru");
         }
 
         String insertMember = """
-            INSERT INTO member (idPengguna, email, noHp, alamat, idKel) 
+            INSERT INTO member (idPengguna, noHp, alamat, email, idKel) 
             VALUES (?, ?, ?, ?, ?)
         """;
         return jdbcTemplate.update(insertMember,
                 idPengguna,
-                member.getEmail(),
                 member.getNoHp(),
                 member.getAlamat(),
+                member.getEmail(),
                 member.getIdKel());
     }
 

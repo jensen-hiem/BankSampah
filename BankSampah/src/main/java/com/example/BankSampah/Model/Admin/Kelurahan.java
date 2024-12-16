@@ -1,4 +1,4 @@
-package com.example.BankSampah.Model;
+package com.example.BankSampah.Model.Admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

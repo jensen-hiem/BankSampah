@@ -1,9 +1,10 @@
-package com.example.BankSampah.Repository;
+package com.example.BankSampah.Repository.Admin;
 
-import com.example.BankSampah.Model.JenisSampah;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.example.BankSampah.Model.Admin.JenisSampah;
 
 import java.util.List;
 import java.util.Optional;

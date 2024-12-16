@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #d4fc79, #96e6a1);
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+        }
+        #judulAdmin {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        nav {
+            text-align: center;
+            margin: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="judulAdmin">Dashboard Admin</div>
+    <nav>
+        <button th:onclick="|window.location.href='@{/kelola-sampah}'|">Kelola Sampah</button>
+        <button th:onclick="|window.location.href='@{/kelola-member}'|">Kelola Data Member</button>
+        <button th:onclick="|window.location.href='@{/kelola-transaksi-member}'|">Kelola Transaksi Penyetoran Member</button>
+        <button th:onclick="|window.location.href='@{/kelola-transaksi-bank}'|">Kelola Transaksi Bank Sampah</button>
+        <button th:onclick="|window.location.href='@{/laporan-sampah}'|">Laporan Keluar Masuk Sampah</button>
+    </nav>
+</body>
+</html>

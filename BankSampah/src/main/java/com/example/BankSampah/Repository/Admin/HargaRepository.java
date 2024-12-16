@@ -1,4 +1,4 @@
-package com.example.BankSampah.Repository;
+package com.example.BankSampah.Repository.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
