@@ -289,3 +289,23 @@ org.postgresql.util.PSQLException: ERROR: insert or update on table "sampah" vio
 2024-12-16T21:49:16.632+07:00  INFO 21160 --- [BankSampah] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
 2024-12-16T21:49:17.428+07:00  INFO 16740 --- [BankSampah] [Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
 2024-12-16T21:49:17.814+07:00  INFO 16740 --- [BankSampah] [Test worker] c.e.B.BankSampahApplicationTests         : Started BankSampahApplicationTests in 1.733 seconds (process running for 2.634)
+2024-12-16T21:54:15.729+07:00  INFO 14356 --- [BankSampah] [Test worker] c.e.B.BankSampahApplicationTests         : Starting BankSampahApplicationTests using Java 21.0.5 with PID 14356 (started by user in D:\Jensen\MANPRO\TUBES\BankSampah\BankSampah)
+2024-12-16T21:54:15.729+07:00  INFO 14356 --- [BankSampah] [Test worker] c.e.B.BankSampahApplicationTests         : No active profile set, falling back to 1 default profile: "default"
+2024-12-16T21:54:16.636+07:00  INFO 14356 --- [BankSampah] [Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-12-16T21:54:16.901+07:00  INFO 14356 --- [BankSampah] [Test worker] c.e.B.BankSampahApplicationTests         : Started BankSampahApplicationTests in 1.373 seconds (process running for 2.168)
+2024-12-16T21:54:28.187+07:00  INFO 22688 --- [BankSampah] [restartedMain] c.e.BankSampah.BankSampahApplication     : Starting BankSampahApplication using Java 21.0.5 with PID 22688 (D:\Jensen\MANPRO\TUBES\BankSampah\BankSampah\build\classes\java\main started by user in D:\Jensen\MANPRO\TUBES\BankSampah\BankSampah)
+2024-12-16T21:54:28.187+07:00  INFO 22688 --- [BankSampah] [restartedMain] c.e.BankSampah.BankSampahApplication     : No active profile set, falling back to 1 default profile: "default"
+2024-12-16T21:54:28.226+07:00  INFO 22688 --- [BankSampah] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-16T21:54:28.226+07:00  INFO 22688 --- [BankSampah] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-16T21:54:28.884+07:00  INFO 22688 --- [BankSampah] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-12-16T21:54:28.895+07:00  INFO 22688 --- [BankSampah] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-12-16T21:54:28.895+07:00  INFO 22688 --- [BankSampah] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.33]
+2024-12-16T21:54:28.922+07:00  INFO 22688 --- [BankSampah] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-12-16T21:54:28.923+07:00  INFO 22688 --- [BankSampah] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 695 ms
+2024-12-16T21:54:29.039+07:00  INFO 22688 --- [BankSampah] [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2024-12-16T21:54:29.201+07:00  INFO 22688 --- [BankSampah] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2024-12-16T21:54:29.229+07:00  INFO 22688 --- [BankSampah] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2024-12-16T21:54:29.229+07:00  INFO 22688 --- [BankSampah] [restartedMain] c.e.BankSampah.BankSampahApplication     : Started BankSampahApplication in 1.295 seconds (process running for 1.543)
+2024-12-16T21:54:30.805+07:00  INFO 22688 --- [BankSampah] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-16T21:54:30.805+07:00  INFO 22688 --- [BankSampah] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-12-16T21:54:30.805+07:00  INFO 22688 --- [BankSampah] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
