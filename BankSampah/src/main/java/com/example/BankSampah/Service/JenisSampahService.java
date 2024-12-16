@@ -1,8 +1,8 @@
 package com.example.BankSampah.Service;
 
-import com.example.BankSampah.Model.JenisSampah;
-import com.example.BankSampah.Repository.HargaRepository;
-import com.example.BankSampah.Repository.JenisSampahRepository;
+import com.example.BankSampah.Model.Admin.JenisSampah;
+import com.example.BankSampah.Repository.Admin.HargaRepository;
+import com.example.BankSampah.Repository.Admin.JenisSampahRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

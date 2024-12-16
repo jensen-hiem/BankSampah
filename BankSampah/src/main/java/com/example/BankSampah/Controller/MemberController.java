@@ -1,7 +1,7 @@
 package com.example.BankSampah.Controller;
 
-import com.example.BankSampah.Model.Kelurahan;
-import com.example.BankSampah.Model.Member;
+import com.example.BankSampah.Model.Admin.Kelurahan;
+import com.example.BankSampah.Model.Admin.Member;
 import com.example.BankSampah.Service.KelurahanService;
 import com.example.BankSampah.Service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/member")
+@RequestMapping("/admin/member")
 public class MemberController {
     private final MemberService memberService;
     private final KelurahanService kelurahanService;
@@ -31,7 +31,7 @@ public class MemberController {
         List<Kelurahan> listKelurahan = kelurahanService.getAllKelurahan();
         model.addAttribute("listKelurahan", listKelurahan);
 
-        return "kelola-member";
+        return "Admin/kelola-member";
     }
 
     @PostMapping("/add")

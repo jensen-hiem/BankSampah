@@ -1,10 +1,11 @@
-package com.example.BankSampah.Repository;
+package com.example.BankSampah.Repository.Admin;
 
-import com.example.BankSampah.Model.Kelurahan;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import com.example.BankSampah.Model.Admin.Kelurahan;
 
 import java.util.List;
 

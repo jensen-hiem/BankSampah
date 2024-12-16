@@ -1,7 +1,7 @@
 package com.example.BankSampah.Controller;
 
 
-import com.example.BankSampah.Model.JenisSampah;
+import com.example.BankSampah.Model.Admin.JenisSampah;
 import com.example.BankSampah.Service.JenisSampahService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -35,7 +35,7 @@ public class JenisSampahController {
         List<JenisSampah> listSampah = jenisSampahService.getAllJenisSampah();
         model.addAttribute("listSampah", listSampah);
 
-        return "kelola-sampah";
+        return "Admin/kelola-sampah";
     }
 
     @PostMapping("/add")

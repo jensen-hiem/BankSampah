@@ -1,8 +1,9 @@
-package com.example.BankSampah.Repository;
+package com.example.BankSampah.Repository.Admin;
 
-import com.example.BankSampah.Model.Kecamatan;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.example.BankSampah.Model.Admin.Kecamatan;
 
 import java.util.List;
 

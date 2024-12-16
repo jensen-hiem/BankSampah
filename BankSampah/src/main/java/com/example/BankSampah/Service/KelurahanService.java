@@ -1,7 +1,8 @@
 package com.example.BankSampah.Service;
 
-import com.example.BankSampah.Model.Kelurahan;
-import com.example.BankSampah.Repository.KelurahanRepository;
+import com.example.BankSampah.Model.Admin.Kelurahan;
+import com.example.BankSampah.Repository.Admin.KelurahanRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
