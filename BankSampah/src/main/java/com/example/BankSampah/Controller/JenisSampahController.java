@@ -1,7 +1,7 @@
 package com.example.BankSampah.Controller;
 
 
-import com.example.BankSampah.Model.JenisSampah;
+import com.example.BankSampah.Model.Admin.JenisSampah;
 import com.example.BankSampah.Service.JenisSampahService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sampah")
 public class JenisSampahController {
 
     @Autowired
@@ -30,18 +29,18 @@ public class JenisSampahController {
     }
 
 
-    @GetMapping
+    @GetMapping("/kelola-sampah")
     public String getAllJenisSampah(Model model) {
         List<JenisSampah> listSampah = jenisSampahService.getAllJenisSampah();
         model.addAttribute("listSampah", listSampah);
 
-        return "kelola-sampah";
+        return "Admin/kelola-sampah";
     }
 
-    @PostMapping("/add")
+    @PostMapping("sampah/add")
     public String addJenisSampah(@RequestParam("idJenisSampah") int idJenisSampah, @RequestParam("idSUK") int idSUK, @ModelAttribute JenisSampah jenisSampah) {
         jenisSampahService.addJenisSampah(jenisSampah);
-        return "redirect:/sampah";
+        return "redirect:/kelola-sampah";
     }
 
     @PostMapping("/update")

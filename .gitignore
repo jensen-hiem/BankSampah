@@ -36,8 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
-# ignore file
-application.properties
+#application properties
+src\main\resources\application.properties
 
 # Ignore build output and logs
 build/

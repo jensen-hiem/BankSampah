@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Member</title>
+    <link rel="stylesheet" th:href="@{/css/kelola-member.css}">
+</head>
+<body>
+    <!-- Header untuk judul dan tombol kembali -->
+    <header>
+        <h1>Kelola Member</h1>
+        <button onclick="window.location.href='/admin'">Kembali ke Dashboard</button>
+    </header>
+
+    <!-- Layout utama: form dan tabel -->
+    <main>
+        <form th:action="@{/member/add}" method="post" onsubmit="return validateForm()">
+            <input type="hidden" name="id" value=""/>
+            <label for="namaMember">Nama Member:</label>
+            <input type="text" id="namaMember" name="nama" required>
+
+            <label for="nomorHP">Nomor HP:</label>
+            <input type="text" id="noHp" name="noHp" pattern="\d{10,15}" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="alamat">Alamat:</label>
+            <textarea id="alamat" name="alamat" required></textarea>
+
+            <label for="kelurahan">Kelurahan:</label>
+            <!-- <input type="text" id="kelurahan" name="kelurahan" required> -->
+
+            <select name="kelurahan" id="kelurahan">
+                <option th:each="li : ${listKelurahan}" th:value="${li.namaKel}" th:text="${li.namaKel}" name="kelurahan"></option>
+              </select>
+            
+            <button type="submit">Tambah Member</button>
+        </form>
+
+        <!-- Tabel Menampilkan Data Member -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama</th>
+                        <th>Nomor HP</th>
+                        <th>Email</th>
+                        <th>Alamat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="member : ${listMember}" th:attr="data-row-id=${member.idPengguna}">
+                        <td th:text="${member.idPengguna}">1</td>
+                        <td th:text="${member.nama}">John Doe</td>
+                        <td contenteditable="true" 
+                            th:data-id="${member.idPengguna}"
+                            onBlur="updateNomorHP(this)"
+                            th:text="${member.noHp}">08123456789</td>
+                        <td th:text="${member.email}">john.doe@email.com</td>
+                        <td th:text="${member.alamat}">Jl. Mawar No. 1, Bandung</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <script>
+                function updateNomorHP(element) {
+                    const idMember = element.getAttribute("data-id");
+                    const nomorHP = element.textContent.trim();
+
+                    if (!nomorHP.match(/^\d{10,15}$/)) {
+                        alert("Nomor HP harus terdiri dari 10 hingga 15 digit angka.");
+                        return;
+                    }
+
+                    fetch(`/member/updateNomorHP?idPengguna=${idMember}&noHp=${nomorHP}`, {
+                        method: "POST",
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Gagal memperbarui nomor HP");
+                        }
+                        return response.text();
+                    })
+                    .then(data => {
+                        alert("Nomor HP berhasil diperbarui!");
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("Gagal memperbarui nomor HP");
+                    });
+                }
+            </script>
+        </div>
+    </main>
+</body>
+</html>

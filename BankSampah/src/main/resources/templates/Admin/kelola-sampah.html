@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Sampah</title>
+    <link rel="stylesheet" th:href="@{/css/kelola-sampah.css}">
+</head>
+<body>
+    <!-- Header untuk judul dan tombol kembali -->
+    <header>
+        <h1>Kelola Sampah</h1>
+        <button onclick="window.location.href='/admin'">Kembali ke Dashboard</button>
+    </header>
+
+    <!-- Layout utama: form dan tabel -->
+    <main>
+        <!-- Form Tambah Sampah -->
+        <form th:action="@{/sampah/add}" method="post" onsubmit="return validateForm()">
+            <label for="namaSampah">Nama Sampah:</label>
+            <input type="text" id="namaSampah" name="namaSampah" required>
+        
+            <!-- Dropdown untuk Jenis Sampah -->
+            <label for="jenisSampah">Jenis Sampah:</label>
+            <select id="jenisSampah" name="idJenisSampah" required>
+                <option value="">-- Pilih Jenis Sampah --</option>
+                <option value="1">Plastik</option>
+                <option value="2">Kaca</option>
+                <option value="3">Kertas</option>
+                <option value="4">Logam</option>
+            </select>
+
+            <!-- Dropdown untuk Satuan -->
+            <label for="satuan">Satuan:</label>
+            <select id="satuan" name="idSUK" required>
+                <option value="">-- Pilih Satuan --</option>
+                <option value="1">kg</option>
+                <option value="2">buah</option>
+                <option value="3">gram</option>
+            </select>
+        
+            <label for="hargaBeli">Harga Beli:</label>
+            <input type="number" id="hargaBeli" name="hargaBeli" step="0.01" required>
+        
+            <label for="tanggal">Tanggal:</label>
+            <input type="date" id="tanggal" name="tanggal" required>
+        
+            <button type="submit">Tambah Sampah</button>
+        </form>
+
+        <script>
+            function validateForm() {
+                const idJenisSampah = document.getElementById('jenisSampah').value;
+                const idSUK = document.getElementById('satuan').value;
+        
+                if (!idJenisSampah || !idSUK) {
+                    alert("Harap pilih jenis sampah dan satuan.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
+
+        <!-- Tabel Menampilkan Data Sampah -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nama Sampah</th>
+                        <th>Jenis</th>
+                        <th>Satuan</th>
+                        <th>Harga Beli</th>
+                        <th>Tanggal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="sampah : ${listSampah}">
+                        <td th:text="${sampah.idSampah}">1</td>
+                        <td th:text="${sampah.namaSampah}">Plastik</td>
+                        <td th:text="${sampah.jenisSampah}">Organik</td>
+                        <td th:text="${sampah.satuan}">Kg</td>
+                        <td contenteditable="true"
+                            th:data-id="${sampah.idSampah}"
+                            onBlur="updateHargaBeli(this)">
+                            <span th:text="${sampah.hargaBeli}"></span>
+                        </td>
+                        <td th:text="${#dates.format(sampah.tanggal, 'yyyy-MM-dd')}">2024-12-14</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <script>
+                function updateHargaBeli(element) {
+                    const idSampah = element.getAttribute("data-id");
+                    const hargaBeli = element.textContent.trim();
+                
+                    // Validasi input harga
+                    if (!hargaBeli || isNaN(hargaBeli) || hargaBeli <= 0) {
+                        alert("Masukkan harga yang valid.");
+                        return;
+                    }
+                
+                    // Kirim request ke server
+                    fetch(`/sampah/update?idSampah=${idSampah}&hargaBeli=${hargaBeli}`, {
+                        method: "POST",
+                    })
+                    .then((response) => {
+                        if (!response.ok) {
+                            return response.text().then((text) => {
+                                console.error("Response error text:", text);
+                                throw new Error("Gagal memperbarui harga");
+                            });
+                        }
+                        return response.text();
+                    })
+                    .then((data) => {
+                        console.log("Response dari server:", data);
+                        alert("Harga berhasil diperbarui!");
+                
+                        // Perbarui tanggal ke tanggal hari ini
+                        const today = new Date();
+                        const formattedDate = today.toISOString().split("T")[0]; // Format: yyyy-MM-dd
+                
+                        // Cari elemen tanggal di baris yang sama
+                        const row = element.closest("tr"); // Baris tempat elemen berada
+                        const dateCell = row.querySelector("td:last-child"); // Asumsi kolom terakhir adalah tanggal
+                        if (dateCell) {
+                            dateCell.textContent = formattedDate; // Perbarui dengan tanggal hari ini
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                        alert("Gagal memperbarui harga");
+                    });
+                }
+            </script>
+        </div>
+    </main>
+</body>
+</html>
