@@ -38,3 +38,10 @@ out/
 
 #application properties
 src\main\resources\application.properties
+
+# Ignore build output and logs
+build/
+*.lock
+*.bin
+*.probe
+*.log
