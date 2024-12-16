@@ -19,13 +19,13 @@ CREATE TABLE Kecamatan (
 CREATE TABLE Kelurahan (
     idKel SERIAL PRIMARY KEY,
     namaKel VARCHAR(50) NOT NULL,
-    idKec INT REFERENCES Kecamatan(idKec)
+    idKec INT NOT NULL REFERENCES Kecamatan(idKec)
 );
 
 CREATE TABLE Pengguna (
     idPengguna SERIAL PRIMARY KEY,
-	username varchar(30),
-    nama VARCHAR(30)
+    nama VARCHAR(30),
+    username VARCHAR(30)
 );
 
 CREATE TABLE IbuBS (
@@ -45,15 +45,15 @@ CREATE TABLE BSPusat (
     idBSPusat SERIAL PRIMARY KEY,
     noTelp CHAR(12) NOT NULL,
     alamat VARCHAR(50) NOT NULL,
-    idKel INT REFERENCES Kelurahan(idKel)
+    idKel INT NOT NULL REFERENCES Kelurahan(idKel)
 );
 
 CREATE TABLE Transaksi (
     idTransaksi SERIAL PRIMARY KEY,
     tanggal DATE NOT NULL,
     tipeTransaksi INT NOT NULL,
-    idPengguna INT REFERENCES Pengguna(idPengguna),
-    idBSPusat INT REFERENCES BSPusat(idBSPusat)
+    idPengguna INT NOT NULL REFERENCES Pengguna(idPengguna),
+    idBSPusat INT NOT NULL REFERENCES BSPusat(idBSPusat)
 );
 
 CREATE TABLE JenisSampah (
@@ -68,25 +68,28 @@ CREATE TABLE SUK (
 
 CREATE TABLE Sampah (
     idSampah SERIAL PRIMARY KEY,
-    namaSampah VARCHAR(40),
-    idJenisSampah INT REFERENCES JenisSampah(idJenisSampah),
-    idSUK INT REFERENCES SUK(idSUK)
+    namaSampah VARCHAR(40) NOT NULL,
+    idJenisSampah INT NOT NULL REFERENCES JenisSampah(idJenisSampah),
+    idSUK INT NOT NULL REFERENCES SUK(idSUK)
 );
 
 CREATE TABLE TransaksiSampah (
-    idTransaksi INT REFERENCES Transaksi(idTransaksi),
-    idSampah INT REFERENCES Sampah(idSampah),
+    idTransaksi INT NOT NULL REFERENCES Transaksi(idTransaksi),
+    idSampah INT NOT NULL REFERENCES Sampah(idSampah),
     jumlahSampah INT NOT NULL,
     hargaTotal INT NOT NULL,
     PRIMARY KEY (idTransaksi, idSampah)
 );
 
 CREATE TABLE Harga (
-    idSampah INT REFERENCES Sampah(idSampah),
+    idSampah INT NOT NULL REFERENCES Sampah(idSampah),
     tanggalUbah DATE NOT NULL,
     hargaSampah INT NOT NULL,
     PRIMARY KEY (idSampah, tanggalUbah)
 );
+
+ALTER TABLE pengguna
+ADD COLUMN password character varying(255) DEFAULT 'pass';
 
 
 INSERT INTO Kecamatan (idKec, namaKec)
@@ -276,14 +279,6 @@ VALUES
 	(150, 'Pasirendah', 30),
 	(151, 'Pasirwangi', 30);
 
-INSERT INTO BSPusat (idBSPusat, noTelp, alamat, idKel)
-VALUES
-	(1, '082145876523', 'Jl. Srigunting Raya No.37', 1),
-	(2, '082114258645', 'Jl. K. H. Wahid Hasyim No.23', 23),
-	(3, '082176783456', 'Jl. Kacapiring No.96', 45),
-	(4, '082234343576', 'Jl. A.H. Nasution No.54', 78),
-	(5, '082178946343', 'Jl. Merdeka No.67', 146);
-
 INSERT INTO JenisSampah (idJenisSampah, namaJenis)
 VALUES
 	(1, 'Plastik'),
@@ -296,7 +291,55 @@ VALUES
 	(1, 'kg'),
 	(2, 'buah'),
 	(3, 'gram');
+--buat fitur member sama sampah ini harus diinsert dulu (sampai suk)
 
+-- Insert data into Pengguna
+INSERT INTO Pengguna (idPengguna, nama, username, password) VALUES
+(1, 'Dina', 'dina123', 'password123'),
+(2, 'Rudi', 'rudi456', 'password456'),
+(3, 'Siti', 'siti789', 'password789'),
+(4, 'Ahmad', 'ahmad321', 'password321');
+
+-- Insert data into IbuBS
+INSERT INTO IbuBS (idPengguna, password) VALUES
+(1, 'ibubs123'),
+(3, 'ibubs789');
+
+-- Insert data into Member
+INSERT INTO Member (idPengguna, noHP, alamat, email, idKel) VALUES
+(2, '081234567890', 'Jl. Mawar No. 1', 'rudi@gmail.com', 1),
+(4, '082345678901', 'Jl. Melati No. 2', 'ahmad@yahoo.com', 2);
+
+-- Insert data into BSPusat
+INSERT INTO BSPusat (idBSPusat, noTelp, alamat, idKel) VALUES
+(1, '02112345678', 'Jl. Raya No. 10', 1),
+(2, '02187654321', 'Jl. Kebon Jeruk No. 5', 2);
+
+-- Insert data into Transaksi
+INSERT INTO Transaksi (idTransaksi, tanggal, tipeTransaksi, idPengguna, idBSPusat) VALUES
+(1, '2024-01-10', 1, 2, 1),
+(2, '2024-01-11', 2, 4, 2);
+
+-- Insert data into Sampah
+INSERT INTO Sampah (idSampah, namaSampah, idJenisSampah, idSUK) VALUES
+(1, 'Botol Plastik', 1, 1),
+(2, 'Kardus', 2, 2);
+
+-- Insert data into TransaksiSampah
+INSERT INTO TransaksiSampah (idTransaksi, idSampah, jumlahSampah, hargaTotal) VALUES
+(1, 1, 10, 50000),
+(2, 2, 5, 30000);
+
+-- Insert data into Harga
+INSERT INTO Harga (idSampah, tanggalUbah, hargaSampah) VALUES
+(1, '2024-01-01', 5000),
+(2, '2024-01-01', 6000);
+
+
+
+
+
+--QUERY LAMA
 INSERT INTO Sampah (idSampah, namaSampah, idJenisSampah, idSUK)
 VALUES
 	(1, 'Botol Plastik 600ml', 1, 2),

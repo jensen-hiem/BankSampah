@@ -49,7 +49,6 @@
                         <th>Nomor HP</th>
                         <th>Email</th>
                         <th>Alamat</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,9 +61,6 @@
                             th:text="${member.noHp}">08123456789</td>
                         <td th:text="${member.email}">john.doe@email.com</td>
                         <td th:text="${member.alamat}">Jl. Mawar No. 1, Bandung</td>
-                        <td>
-                            <button th:onclick="'deleteMember(' + ${member.idPengguna} + ')'" type="button">Hapus</button>
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -95,26 +91,6 @@
                         console.error("Error:", error);
                         alert("Gagal memperbarui nomor HP");
                     });
-                }
-
-                function deleteMember(id) {
-                    if (confirm("Apakah Anda yakin ingin menghapus member ini?")) {
-                        fetch(`/member/delete?id=${id}`, {
-                            method: "DELETE",
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error("Gagal menghapus member");
-                            }
-                            // Hapus baris dari tabel secara dinamis
-                            document.querySelector(`[data-row-id='${id}']`).remove();
-                            alert("Member berhasil dihapus!");
-                        })
-                        .catch(error => {
-                            console.error("Error:", error);
-                            alert("Gagal menghapus member");
-                        });
-                    }
                 }
             </script>
         </div>
