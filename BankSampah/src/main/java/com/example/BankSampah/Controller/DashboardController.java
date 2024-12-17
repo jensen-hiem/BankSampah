@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DashboardController {
-    @GetMapping("/kelola-transaksi-member")
-    public String kelolaTransaksiMember() {
-        return "Admin/kelola-transaksi-member";
-    }
+    // @GetMapping("/kelola-transaksi-member")
+    // public String kelolaTransaksiMember() {
+    //     return "Admin/kelola-transaksi-member";
+    // }
 
     // @GetMapping("/kelola-transaksi-bank")
     // public String kelolaTransaksiBank() {
