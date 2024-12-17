@@ -1,15 +1,98 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Transaksi Penyetoran Member</title>
+    <title>Kelola Transaksi Penyetoran</title>
+    <link rel="stylesheet" th:href="@{/css/kelola-transaksi-member.css}">
 </head>
 <body>
-    <h1>Kelola Transaksi Penyetoran Member</h1>
-    <button onclick="window.location.href='/admin'">Kembali ke Dashboard</button>
-    <form>
-        <!-- Form dan Tabel Kelola Transaksi Penyetoran -->
-    </form>
+    <header>
+        <h1>Kelola Transaksi Penyetoran</h1>
+        <button onclick="window.location.href='/admin'">Kembali ke Dashboard</button>
+    </header>
+
+    <main>
+        <!-- Form Tambah Transaksi -->
+        <form th:action="@{/transaksi/add}" method="post" onsubmit="return validateForm()">
+            <label for="member">Member:</label>
+
+            <!-- <select id="member" name="idMember">
+                <option value="">-- Pilih Member --</option>
+                <option th:each="li : ${listMember}" th:value="${li.idPengguna}" th:text="${li.nama}" name="member"></option>
+            </select> -->
+
+            <select name="idPengguna" id="idMember">
+                <option th:each="li : ${listMember}" th:value="${li.idPengguna}" th:text="${li.nama}"></option>
+            </select>
+
+            <label for="tanggal">Tanggal:</label>
+            <input type="date" id="tanggal" name="tanggal" required>
+
+            <label for="sampah">Sampah:</label>
+            <select id="sampah" name="idSampah" required>
+                <option value="">-- Pilih Sampah --</option>
+                <option th:each="sampah : ${listSampah}" th:value="${sampah.idSampah}" th:text="${sampah.namaSampah}"></option>
+            </select>
+
+            <label for="jumlahSampah">Jumlah Sampah:</label>
+            <input type="number" id="jumlahSampah" name="jumlahSampah" min="1" required>
+
+            <!-- <label for="hargaTotal">Harga Total:</label>
+            <input type="number" id="hargaTotal" name="hargaTotal" readonly> -->
+
+            <button type="submit">Tambah Transaksi</button>
+        </form>
+
+        <!-- Tabel Data Transaksi -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Transaksi</th>
+                        <th>Member</th>
+                        <th>Tanggal</th>
+                        <th>Sampah</th>
+                        <th>Jumlah</th>
+                        <th>Harga Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="transaksi : ${listTransaksi}" th:attr="data-row-id=${transaksi.idTransaksi}">
+                        <td th:text="${transaksi.idTransaksi}"></td>
+                        <td th:text="${transaksi.namaPengguna}"></td>
+                        <td th:text="${#dates.format(transaksi.tanggal, 'yyyy-MM-dd')}"></td>
+                        <td th:text="${transaksi.namaSampah}"></td>
+                        <td th:text="${transaksi.jumlahSampah}"></td>
+                        <td th:text="${transaksi.hargaTotal}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <script>
+        document.getElementById('sampah').addEventListener('change', calculateTotal);
+        document.getElementById('jumlahSampah').addEventListener('input', calculateTotal);
+    
+        function calculateTotal() {
+    const idSampah = document.getElementById('sampah').value;
+    const jumlahSampah = document.getElementById('jumlahSampah').value;
+    if (idSampah && jumlahSampah) {
+        fetch(`/transaksi/getHarga?idSampah=${idSampah}`)
+            .then(response => response.json())
+            .then(data => {
+                const total = data.harga * jumlahSampah;
+                document.getElementById('hargaTotal').value = total; // Set hargaTotal
+            })
+            .catch(error => {
+                console.error("Error fetching harga:", error);
+                document.getElementById('hargaTotal').value = 0; // Default fallback
+            });
+    } else {
+        document.getElementById('hargaTotal').value = ""; // Kosongkan jika tidak valid
+    }
+}
+
+    </script>
 </body>
 </html>
