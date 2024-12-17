@@ -45,3 +45,7 @@ build/
 *.bin
 *.probe
 *.log
+
+
+application.log
+.gradle/

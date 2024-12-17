@@ -72,7 +72,7 @@ public class TransaksiBankSampahController {
                 e.printStackTrace();
                 // Tambahkan log atau penanganan error jika diperlukan
             }
-            transaksi.setTipeTransaksi(1); // misalnya tipe 1 untuk "Transaksi ke Bank Sampah"
+            transaksi.setTipeTransaksi(2); // misalnya tipe 2 untuk "Transaksi ke Bank Sampah"
             transaksi.setIdBSPusat(idBSPusat);
             transaksi.setIdPengguna(1); // id pengguna, sementara hardcoded
             transaksi.setIdSampah(idSampahList.get(i));
