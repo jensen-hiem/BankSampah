@@ -1,15 +1,117 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Transaksi Bank Sampah</title>
+    <title>Transaksi ke Bank Sampah Pusat</title>
+    <link rel="stylesheet" th:href="@{/css/kelola-transaksi-bank.css}">
 </head>
 <body>
-    <h1>Kelola Transaksi Bank Sampah</h1>
-    <button onclick="window.location.href='/admin'">Kembali ke Dashboard</button>
-    <form>
-        <!-- Form dan Tabel Kelola Transaksi Bank -->
-    </form>
+    <!-- Header -->
+    <header>
+        <h1>Transaksi ke Bank Sampah Pusat</h1>
+        <button onclick="window.location.href='/admin'">Kembali ke Dashboard</button>
+    </header>
+
+    <!-- Form Pemilihan Kelurahan dan Bank Sampah -->
+    <main>
+        <form th:action="@{/transaksi/bank}" method="post" onsubmit="return validateTransaksi()">
+            <!-- Dropdown untuk Bank Sampah Kelurahan -->
+            <label for="kelurahan">Pilih Bank Sampah:</label>
+            <select name="kelurahan" id="kelurahan">
+                <option th:each="li : ${listKelurahan}" th:value="${li.namaKel}" th:text="${li.namaKel}" name="kelurahan"></option>
+            </select>
+
+            <!-- Input Tanggal Transaksi -->
+            <label for="tanggalTransaksi">Tanggal Transaksi:</label>
+            <input type="date" id="tanggalTransaksi" name="tanggal" required>
+
+            <!-- Tabel Daftar Sampah -->
+            <h2>Daftar Sampah</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pilih</th>
+                            <th>Nama Sampah</th>
+                            <th>Jenis Sampah</th>
+                            <th>Satuan</th>
+                            <th>Jumlah</th>
+                            <th>Harga per Satuan</th>
+                            <th>Total Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sampah : ${listSampah}">
+                            <td>
+                                <input type="checkbox" name="idSampah" th:value="${sampah.idSampah}" onchange="calculateTotal(this)">
+                            </td>
+                            <td th:text="${sampah.namaSampah}">Plastik</td>
+                            <td th:text="${sampah.jenisSampah}">Kertas</td>
+                            <td th:text="${sampah.satuan}">Kg</td>
+                            <td>
+                                <input type="number" name="jumlahSampah" min="0" step="1" oninput="calculateTotal(this)" disabled>
+                            </td>
+                            <td th:text="${sampah.hargaBeli}">5000</td>
+                            <td class="total-harga">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Total Keseluruhan: <span id="grandTotal">0</span></h3>
+            <input type="hidden" id="idBSPusat" name="idBSPusat" value="">
+            <!-- Tombol Submit -->
+            <button type="submit">Simpan Transaksi</button>
+        </form>
+    </main>
+
+    <script>
+
+        function updateBankSampah() {
+            const kelurahanDropdown = document.getElementById("kelurahan");
+            const bankSampahInput = document.getElementById("bankSampah");
+
+            // Ambil Bank Sampah sesuai Kelurahan
+            const selectedKelurahan = kelurahanDropdown.value;
+            bankSampahInput.value = bankSampahByKelurahan[selectedKelurahan] || "";
+        }
+
+        function calculateTotal(element) {
+            const row = element.closest("tr");
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            const jumlahInput = row.querySelector('input[name="jumlahSampah"]');
+            const hargaPerSatuan = parseInt(row.querySelector("td:nth-child(6)").innerText);
+            const totalHargaCell = row.querySelector(".total-harga");
+        
+            let grandTotal = 0;
+        
+            if (checkbox.checked) {
+                jumlahInput.disabled = false;
+                const jumlah = parseInt(jumlahInput.value) || 0;
+                totalHargaCell.innerText = hargaPerSatuan * jumlah;
+            } else {
+                jumlahInput.disabled = true;
+                jumlahInput.value = "";
+                totalHargaCell.innerText = 0;
+            }
+        
+            // Hitung grand total keseluruhan
+            document.querySelectorAll(".total-harga").forEach(cell => {
+                grandTotal += parseInt(cell.innerText) || 0;
+            });
+        
+            document.getElementById("grandTotal").innerText = grandTotal;
+        }
+
+        function validateTransaksi() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            if (checkboxes.length === 0) {
+                alert("Harap pilih setidaknya satu sampah untuk transaksi.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>

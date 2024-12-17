@@ -10,14 +10,14 @@ public class DashboardController {
         return "Admin/kelola-transaksi-member";
     }
 
-    @GetMapping("/kelola-transaksi-bank")
-    public String kelolaTransaksiBank() {
-        return "Admin/kelola-transaksi-bank";
-    }
+    // @GetMapping("/kelola-transaksi-bank")
+    // public String kelolaTransaksiBank() {
+    //     return "Admin/kelola-transaksi-bank";
+    // }
 
-    @GetMapping("/laporan-sampah")
-    public String laporanSampah() {
-        return "Admin/laporan-sampah";
-    }
+    // @GetMapping("/laporan-sampah")
+    // public String laporanSampah() {
+    //     return "Admin/laporan-sampah";
+    // }
 }
 

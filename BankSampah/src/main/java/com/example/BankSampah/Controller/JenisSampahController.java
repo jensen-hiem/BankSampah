@@ -43,7 +43,7 @@ public class JenisSampahController {
         return "redirect:/kelola-sampah";
     }
 
-    @PostMapping("/update")
+    @PostMapping("/sampah/update")
     @ResponseBody
     public ResponseEntity<String> updateHarga(@RequestParam int idSampah, @RequestParam int hargaBeli) {
         try {
