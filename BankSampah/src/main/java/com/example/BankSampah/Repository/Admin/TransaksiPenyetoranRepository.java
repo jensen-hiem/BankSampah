@@ -48,7 +48,7 @@ public class TransaksiPenyetoranRepository {
         jdbcTemplate.update(
                 sqlTransaksi,
                 transaksi.getTanggal(),
-                2,
+                1,
                 transaksi.getIdPengguna(),
                 2);
 
