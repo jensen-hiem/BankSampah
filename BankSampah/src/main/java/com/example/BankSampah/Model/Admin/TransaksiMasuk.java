@@ -1,21 +1,17 @@
 package com.example.BankSampah.Model.Admin;
 
-import java.util.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TransaksiBankSampah {
-    private int idTransaksi;
+public class TransaksiMasuk {
     private Date tanggal;
-    private int tipeTransaksi; 
-    private int idPengguna; 
-    private int idBSPusat;
-    private int idSampah; 
-    private int jumlahSampah;
+    private String namaMember;
+    private String namaSampah;
     private int hargaTotal;
 }

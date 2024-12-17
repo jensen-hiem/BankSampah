@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Transaksi Sampah</title>
+    <link rel="stylesheet" th:href="@{/css/laporan-transaksi.css}">
+</head>
+<body>
+    <header>
+        <h1>Laporan Transaksi Sampah</h1>
+        <button onclick="window.location.href='/admin'">Kembali ke Dashboard</button>
+    </header>
+
+    <main>
+        <!-- Bagian Transaksi Masuk -->
+        <section>
+            <h2>Transaksi Masuk</h2>
+            <div class="table-wrapper">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama Member</th>
+                            <th>Nama Sampah</th>
+                            <th>Harga Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Menampilkan data transaksi masuk -->
+                        <tr th:each="transaksi : ${transaksiMasuk}">
+                            <td th:text="${transaksi.tanggal}">2024-01-01</td>
+                            <td th:text="${transaksi.namaMember}">Nama Member</td>
+                            <td th:text="${transaksi.namaSampah}">Plastik</td>
+                            <td th:text="${transaksi.hargaTotal}">10000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Bagian Transaksi Keluar -->
+        <section>
+            <h2>Transaksi Keluar</h2>
+            <div class="table-wrapper">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama Kelurahan</th>
+                            <th>Nama Sampah</th>
+                            <th>Harga Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Menampilkan data transaksi keluar -->
+                        <tr th:each="transaksi : ${transaksiKeluar}">
+                            <td th:text="${transaksi.tanggal}">2024-01-01</td>
+                            <td th:text="${transaksi.namaKelurahan}">Nama Kelurahan</td>
+                            <td th:text="${transaksi.namaSampah}">Plastik</td>
+                            <td th:text="${transaksi.hargaTotal}">20000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

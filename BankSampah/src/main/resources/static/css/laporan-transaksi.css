@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+}
+
+/* Styling untuk header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Tambahkan sedikit background untuk kontras */
+}
+
+h1 {
+    margin: 0;
+    color: #28a745;
+    font-size: 28px;
+}
+
+header button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+header button:hover {
+    background-color: #0056b3;
+}
+
+main {
+    justify-content: space-between;
+    height: calc(100% - 60px); /* Sisa tinggi setelah dikurangi header */
+    padding: 20px;
+    box-sizing: border-box;
+}
+/* Styling untuk tabel */
+table {
+    width: 100%; /* Tabel menggunakan seluruh lebar */
+    border-collapse: collapse; /* Menghilangkan garis ganda antar sel */
+    table-layout: fixed; /* Kolom tetap untuk estetika */
+    background-color: #fff;
+    border-radius: 10px; /* Sudut tabel melengkung */
+    overflow: hidden; /* Pastikan sudut tabel terlihat */
+}
+
+table th, table td {
+    padding: 12px; /* Padding untuk jarak teks */
+    text-align: center; /* Posisi teks di tengah */
+    border: 1px solid #ddd; /* Garis pemisah antar sel */
+    word-wrap: break-word; /* Teks tidak akan keluar dari sel */
+    transition: background-color 0.3s ease-in-out; /* Efek transisi ketika hover */
+}
+
+/* Styling khusus untuk sel (td) */
+table td {
+    color: #333; /* Warna teks abu tua */
+    font-size: 14px; /* Ukuran font */
+    background-color: #ffffff; /* Warna dasar sel */
+}
+
+/* Efek hover untuk baris tabel */
+table tbody tr:hover {
+    background-color: #e9ffe6; /* Warna hijau lembut */
+    cursor: pointer; /* Menunjukkan elemen interaktif */
+}
+
+/* Baris genap mendapatkan warna abu terang */
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Styling header tabel */
+table thead {
+    background-color: #28a745; /* Warna hijau untuk header */
+    color: white; /* Warna teks putih */
+}
+
+table thead th {
+    position: sticky;
+    top: 0; /* Tetap di atas saat scroll */
+    z-index: 2; /* Tetap di atas konten lainnya */
+    background-color: #28a745;
+    color: #fff;
+    font-weight: bold; /* Teks tebal */
+    text-transform: uppercase; /* Huruf besar */
+}
